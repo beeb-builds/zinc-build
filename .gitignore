@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Rust
+target/
+
+# Private keys and credentials
+*.pem
+*.key
+credentials/
+near-credentials/
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
