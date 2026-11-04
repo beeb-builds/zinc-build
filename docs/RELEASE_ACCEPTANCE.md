@@ -16,12 +16,19 @@ This is an evidence checkpoint, not a security audit or a guarantee of readiness
   `Grm48varDeZwj3GLGksjLnsHU6wkZnEbkkdyPUucrRNM`, confirmed the same balances
   and campaign #7 ownership. Capture: `data/wallet-acceptance-276260646-1793833446071.json`
   (gitignored). UTC capture falls on November 4; the local test date is November 5.
-- A full navigation to the workspace required reconnecting Nightly. Fresh
-  connection approval and signed workspace access are still pending; no new
-  financial action was approved or submitted by this check.
+- A full navigation to the workspace required reconnecting Nightly. The user
+  approved reconnection and signed the hosted-domain workspace message. A then
+  received **Current-holder access** to campaign #7. Recheck access succeeded
+  without another signature; the creator has not published a brief yet.
+- MIT and release documentation were pushed in commit
+  `a05aca87c9cbeeb10fe7a4989ba62025d2f5abef`. Railway deployment
+  `f2774441-501f-4e83-828e-497febf434e7` reached **SUCCESS**. Post-deploy GETs to
+  `/`, `/gallery`, `/explore`, `/campaigns/7` and `/api/activity` returned HTTP 200.
+- No new deposit, claim or NFT transfer was submitted during these checks.
 
-This partial acceptance result does not certify reload persistence or the full
-signed flow. MIT was selected by the owner and added to the repository.
+This partial acceptance result does not certify automatic wallet restoration,
+account switching or a new complete financial scenario. MIT was selected by the
+owner and added to the repository.
 
 ## Evidence and coverage
 
@@ -59,9 +66,9 @@ is local and gitignored. Public chain state and current ownership may change.
 
 ## Remaining acceptance work
 
-1. Complete a fresh hosted-domain wallet walkthrough with manual approvals,
-   including NEP-413 workspace signing, rejection/recovery and account switching.
-   Use a fresh campaign if demonstrating the full financial sequence.
+1. Finish the hosted-domain wallet walkthrough: account switching, rejection and
+   recovery remain separate from the now-passed NEP-413 current-holder signing.
+   Use a fresh campaign if demonstrating a new full financial sequence.
 2. Retest a physical phone. Nightly/Sender mobile connectivity is not certified
    by viewport tests or by desktop wallet success.
 3. Demonstrate revocation with a non-sensitive published brief already rendered
