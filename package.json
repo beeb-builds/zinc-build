@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/patch-sender-mobile.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/patch-sender-mobile.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -21,7 +23,7 @@
     "@near-wallet-selector/narwallets": "^10.1.4",
     "@near-wallet-selector/nightly": "^10.1.4",
     "@near-wallet-selector/okx-wallet": "^10.1.4",
-    "@near-wallet-selector/sender": "^10.1.4",
+    "@near-wallet-selector/sender": "10.1.4",
     "clsx": "^2.1.1",
     "lucide-react": "^1.62.0",
     "near-api-js": "^7.2.0",

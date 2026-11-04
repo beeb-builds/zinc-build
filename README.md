@@ -44,6 +44,21 @@ its .next directory, then restart after the build. Replacing assets underneath a
 running older server can cause missing CSS/JavaScript. Starting the app does not
 deploy a contract or run a migration.
 
+### Mobile wallet connections
+
+Nightly and Sender use injected NEAR extension providers. A separate installed
+phone app does not automatically connect to a regular browser. Extension-capable
+mobile browsers must expose the wallet's NEAR provider, and the wallet must be
+able to reach NEAR Testnet. Nightly's own "could not connect ... Near network"
+screen requires troubleshooting within the wallet/network; Zinc cannot change
+the wallet's internal RPC configuration.
+
+The build/dev pre-hooks apply a version-guarded compatibility patch to Sender
+10.1.4: its mobile exclusion is relaxed only when `window.near.isSender` is
+already present. Official signing methods remain unchanged. Ordinary mobile
+browsers without that provider still do not list Sender. Review the patch before
+upgrading the Sender adapter. Run `node scripts/check-sender-mobile.cjs` to verify it.
+
 ## Judge walkthrough: do X, see Y
 
 [The demo guide](docs/JUDGE_DEMO.md) contains a public tour, a fresh two-wallet

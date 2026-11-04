@@ -13,7 +13,8 @@ data/
 *.pem
 *.log
 contracts/
-scripts/
+scripts/*
+!scripts/patch-sender-mobile.mjs
 docs/
 campaign-rights.json
 claim*.json
