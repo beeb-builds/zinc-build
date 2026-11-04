@@ -13,6 +13,7 @@ import { setupIntearWallet } from "@near-wallet-selector/intear-wallet";
 import { setupNarwallets } from "@near-wallet-selector/narwallets";
 
 import { ZINC_CONTRACT_ID } from "./near";
+import { withNightlyConnection } from "./nightly-connection";
 
 export async function createWalletSelector() {
   return setupWalletSelector({
@@ -23,7 +24,7 @@ export async function createWalletSelector() {
       setupMeteorWallet(),
       setupHotWallet(),
       setupHereWallet(),
-      setupNightly(),
+      withNightlyConnection(setupNightly()),
       setupOKXWallet(),
       setupBitgetWallet(),
       setupCoin98Wallet(),
