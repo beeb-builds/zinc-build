@@ -49,6 +49,7 @@ export default function RevenueRightCard({ right, campaignName, status }: Revenu
         <Fingerprint size={14} className="mt-0.5 shrink-0 text-[#8194ae]" />
         <div className="min-w-0"><p className="text-[10px] uppercase tracking-wider text-[#8194ae]">Current owner</p><p className="mt-1 break-all font-mono text-[11px] leading-4 text-[#b9c6d8]">{right.owner_id}</p></div>
       </div>
+      <div className="mt-4 border-t border-white/5 pt-3"><p className="text-[10px] uppercase tracking-wider text-[#8194ae]">Token ID</p><p className="mt-1 break-all font-mono text-[11px] leading-5 text-[#b9c6d8]">{right.token_id}</p><p className="mt-3 text-xs font-semibold text-[#ff9988]">Open NFT details ↗</p></div>
     </Link>
   );
 }

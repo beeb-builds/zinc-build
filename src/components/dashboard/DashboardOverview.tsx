@@ -29,11 +29,7 @@ import {
 
 import DashboardShell from "../layout/DashboardShell";
 import { useReadRefresh } from "../data/useReadRefresh";
-import { useWallet } from "../wallet/WalletProvider";
-import { getCampaigns, getClaimable, getNftTotalSupply, type OnChainCampaign } from "../../lib/zinc-contract";
-import DashboardActions from "./DashboardActions";
-import WalletDashboard from "./WalletDashboard";
-import { summarizeDashboardClaims, type DashboardClaim } from "../../lib/dashboard-claims";
+import { getCampaigns, getNftTotalSupply, type OnChainCampaign } from "../../lib/zinc-contract";
 import { campaignStatus, validateDiscoveryCampaigns } from "../../lib/campaign-discovery";
 
 const allocationColors = ["#ff6d5f", "#ff8da1", "#e7bf72", "#69dab8", "#8fa0bc"];
@@ -100,7 +96,6 @@ function MetricCard({
 }
 
 export default function DashboardOverview() {
-  const { accountId, connect } = useWallet();
 
   const [campaigns, setCampaigns] = useState<OnChainCampaign[] | null>(null);
   const [nftSupply, setNftSupply] = useState<string | null>(null);
@@ -109,8 +104,6 @@ export default function DashboardOverview() {
   const [refreshing, setRefreshing] = useState(true);
   const { version: refreshIndex, refresh: refreshData } = useReadRefresh();
   const [now, setNow] = useState<number | null>(null);
-  const [claimable, setClaimable] = useState<{ accountId: string; campaigns: OnChainCampaign[]; amount: bigint; ready: DashboardClaim[] } | null>(null);
-  const [claimError, setClaimError] = useState<{ accountId: string; campaigns: OnChainCampaign[] } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -151,34 +144,11 @@ export default function DashboardOverview() {
     return () => clearTimeout(timer);
   }, [campaigns]);
 
-  useEffect(() => {
-    let cancelled = false;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- Invalidate wallet-specific earnings immediately when account or campaign snapshot changes.
-    setClaimable(null);
-    setClaimError(null);
-    if (!accountId || !campaigns) return;
-    const connectedAccount = accountId;
-    const campaignSnapshot = campaigns;
-    async function loadClaims() {
-      try {
-        const amounts = await Promise.all(campaignSnapshot.map((campaign) => getClaimable(campaign.id, connectedAccount)));
-        const summary = summarizeDashboardClaims(campaignSnapshot, amounts);
-        if (!cancelled) setClaimable({ accountId: connectedAccount, campaigns: campaignSnapshot, ...summary });
-      } catch {
-        if (!cancelled) setClaimError({ accountId: connectedAccount, campaigns: campaignSnapshot });
-      }
-    }
-    void loadClaims();
-    return () => { cancelled = true; };
-  }, [accountId, campaigns]);
-
   const orderedCampaigns = useMemo(() => campaigns ? [...campaigns].sort((a, b) => b.created_at_ms - a.created_at_ms || b.id - a.id) : [], [campaigns]);
   const activeCampaigns = now === null ? [] : orderedCampaigns.filter((campaign) => campaignStatus(campaign, now) === "Active");
   const selectedCampaign = activeCampaigns[0] ?? orderedCampaigns[0];
   const totalRevenue = useMemo(() => campaigns?.reduce((sum, campaign) => sum + depositedAmount(campaign), BigInt(0)) ?? null, [campaigns]);
   const revenueLabel = totalRevenue === null ? campaignError ? "Unavailable" : "Loading…" : `${yoctoToNear(totalRevenue)} NEAR`;
-  const claimsFailed = Boolean(accountId && claimError?.accountId === accountId && claimError.campaigns === campaigns);
-  const currentClaims = accountId && claimable?.accountId === accountId && claimable.campaigns === campaigns ? claimable : null;
   const allocationData = useMemo(() => selectedCampaign ? [
     ...selectedCampaign.contributors.map((contributor, index) => ({ id: `contributor-${index}`, name: contributor.role, value: contributor.share_bps, color: allocationColors[index % allocationColors.length] })),
     { id: "treasury", name: "Project Treasury", value: selectedCampaign.treasury_share_bps, color: "#8fa0bc" },
@@ -191,8 +161,8 @@ export default function DashboardOverview() {
 
   return (
     <DashboardShell
-      title="Campaign Overview"
-      subtitle="Your wallet’s earnings, alongside live activity across the Zinc platform."
+      title="Explore Zinc"
+      subtitle="Public projects, revenue-right NFTs and live activity across Zinc."
       headerActions={
         <button
           type="button"
@@ -212,7 +182,7 @@ export default function DashboardOverview() {
               </p>
 
               <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                Revenue command center
+                Explore the Zinc network
               </h2>
             </div>
 
@@ -226,19 +196,17 @@ export default function DashboardOverview() {
           </div>
 
           {refreshing && <p role="status" className="mb-4 text-sm text-[#8fa0bc]">Loading live dashboard data from NEAR Testnet…</p>}
-          {(campaignError || nftError || claimsFailed) && (
+          {(campaignError || nftError) && (
             <p role="alert" className="mb-4 rounded-xl border border-[#ff7568]/20 bg-[#ff7568]/10 p-4 text-sm text-[#ff8b80]">
-              {campaignError && "Could not load campaigns. "}{nftError && "Could not load the NFT supply. "}{claimsFailed && "Could not load claimable earnings for this wallet. "}Select Refresh data to try again. Unavailable values are not shown as zero.
+              {campaignError && "Could not load campaigns. "}{nftError && "Could not load the NFT supply. "}Select Refresh data to try again. Unavailable values are not shown as zero.
             </p>
           )}
 
-          <WalletDashboard accountId={accountId} campaigns={campaigns} campaignError={campaignError} onConnect={connect} />
+          <section aria-label="Explore Zinc destinations" className="mb-6 grid gap-4 sm:grid-cols-3">
+            {[["/", "Your dashboard", "See your account’s earnings, rights and projects."], ["/campaigns", "Explore projects", "Meet project contributors and inspect their allocations."], ["/gallery", "Browse revenue-right NFTs", "See real minted rights, their shares and current owners."]].map(([href, title, description]) => <Link key={href} href={href} className="zinc-interactive-surface rounded-2xl border border-[#ff7568]/20 bg-[#10213d] p-5"><h2 className="font-semibold text-[#ff9988]">{title} ↗</h2><p className="mt-3 text-sm leading-6 text-[#aebbd0]">{description}</p></Link>)}
+          </section>
 
-          <DashboardActions accountId={accountId} claims={currentClaims?.ready ?? null} claimsFailed={claimsFailed}
-            campaignFailed={campaignError} campaignsReady={campaigns !== null && now !== null}
-            activeCampaign={activeCampaigns[0] ?? null} onConnect={connect} />
-
-          <div className="mb-4 mt-8"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ff9988]">Across all Zinc</p><h3 className="mt-2 text-xl font-semibold">Platform overview</h3><p className="mt-2 text-sm leading-6 text-[#8fa0bc]">These shared on-chain totals and public campaigns are the same for every wallet. Your personal balances are shown above.</p></div>
+          <div className="mb-4 mt-8"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ff9988]">Across all Zinc</p><h3 className="mt-2 text-xl font-semibold">Platform overview</h3><p className="mt-2 text-sm leading-6 text-[#8fa0bc]">These shared on-chain totals and public campaigns are the same for every wallet. Your personal balances are on Your dashboard.</p></div>
           <section aria-label="Platform totals" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <MetricCard
               title="Total campaign revenue"

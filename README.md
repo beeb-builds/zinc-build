@@ -11,11 +11,13 @@ This is a NEAR Testnet prototype. Earnings come from actual deposits; creating o
 holding a right does not guarantee revenue.
 
 Repository: [beeb-builds/zinc-build](https://github.com/beeb-builds/zinc-build).
-The latest [QA report](docs/QA_BATCH_9.md) records a passing clean working-tree
+The earlier [clean-release QA report](docs/QA_BATCH_9.md) records a passing clean working-tree
 install/build/lint, 24 regressions, 45 responsive browser checks and NFT motion /
 reduced-motion checks. Hosted wallet-signing acceptance remains a separate check.
 The Testnet app is hosted on Railway at
 [zinc-build-production.up.railway.app](https://zinc-build-production.up.railway.app).
+The [product discovery update](docs/PRODUCT_DISCOVERY.md) separates the personal
+dashboard from Explore Zinc and adds public NFT discovery and project rosters.
 
 ## Run locally
 
@@ -66,9 +68,11 @@ scenario and exact expected amounts.
 
 | Do this | See this |
 | --- | --- |
-| Open / | Your connected wallet's balances, NFTs and related campaigns, followed by clearly labeled platform totals and public campaigns. |
+| Open / | Personal wallet balances, NFT counts, related campaigns and creator/contributor/visitor onboarding. No platform statistics on this page. |
+| Open /explore | Shared platform totals, real campaign revenue charts and public discovery links. |
+| Open /gallery without a wallet | Minted revenue-right NFTs, token IDs, current owners, project filters and links to team/NFT details. |
 | Open /campaigns | On-chain campaigns, status, dates and deposited totals. |
-| Open /campaigns/7 | Acceptance campaign, 60% Artist right, 40% treasury, original contributor versus current owner. |
+| Open /campaigns/7 | Acceptance campaign, creator/contributor/treasury roster, visible NFTs, original versus current owners, and deposit/claim section links. |
 | Open /rights/campaign%3A7%3Aright%3A0 | Actual NFT, current owner and available ownership history. |
 | Connect a Testnet wallet; open /nfts | Current and known transferred rights; an unrelated wallet may own none. |
 | Open /earnings connected | Campaign/account claimed and claimable amounts, including historical earnings. |

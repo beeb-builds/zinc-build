@@ -114,25 +114,27 @@ async function CampaignDetails({ params }: CampaignPageProps) {
           <Detail label="Total Revenue Deposited" value={formatNear(campaign.total_deposited_yocto)} />
         </dl>
         <p className="mt-4 text-xs leading-5 text-[#71809D]">Deposit eligibility uses NEAR block time. The displayed status follows your device clock; the contract makes the final check when a deposit executes. Ending a campaign does not remove earned claimable revenue.</p>
+        <nav aria-label="Campaign sections" className="mt-5 flex flex-wrap gap-3 text-sm font-semibold text-[#FF8E9C]"><Link href="#project-team" className="rounded-xl border border-[#293954] px-3 py-2">Meet the team</Link><Link href="#revenue-rights" className="rounded-xl border border-[#293954] px-3 py-2">Inspect NFTs</Link><Link href="#deposit-revenue" className="rounded-xl border border-[#293954] px-3 py-2">Deposit revenue</Link><Link href="#claim-revenue" className="rounded-xl border border-[#293954] px-3 py-2">Claim earnings</Link></nav>
         <div className="mt-6 flex flex-wrap items-start justify-between gap-3 border-t border-[#293954] pt-5">
           <p className="max-w-lg text-xs leading-5 text-[#71809D]">Campaign data is a snapshot from NEAR Testnet. Refresh to check deposits made elsewhere and reload ownership, earnings and available activity.</p>
           <CampaignRefreshButton />
         </div>
       </section>
 
-      <DepositRevenueForm
+      <RevenueRightsSection key={campaign.id} campaign={campaign} />
+
+      <div id="deposit-revenue" className="scroll-mt-6"><DepositRevenueForm
         key={campaign.id}
         campaignId={campaign.id}
         startTimestampMs={campaign.start_timestamp_ms}
         endTimestampMs={campaign.end_timestamp_ms}
         initiallyActive={status === "Active"}
-      />
+      /></div>
       <CampaignPaymentLink campaignId={campaign.id} />
       <Link href={`/workspace/${campaign.id}`} className="inline-flex rounded-xl border border-[#FF8E9C]/25 px-4 py-3 text-sm font-semibold text-[#FF8E9C]">Open holder workspace ↗</Link>
 
       <ClaimRevenueSection campaignId={campaign.id} totalDepositedYocto={campaign.total_deposited_yocto} />
 
-      <RevenueRightsSection key={campaign.id} campaign={campaign} />
       <ActivityFeed campaignId={campaign.id} compact />
 
       <section className="rounded-2xl border border-[#FF8E9C]/20 bg-[#122344] p-6 md:p-8">

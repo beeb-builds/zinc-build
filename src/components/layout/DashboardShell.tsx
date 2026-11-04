@@ -11,6 +11,7 @@ import {
   LogOut,
   Settings,
   Wallet,
+  Compass,
 } from "lucide-react";
 
 import { useWallet } from "../wallet/WalletProvider";
@@ -27,7 +28,7 @@ type DashboardShellProps = {
 
 const navigation = [
   {
-    name: "Overview",
+    name: "Dashboard",
     href: "/",
     icon: LayoutDashboard,
   },
@@ -69,6 +70,7 @@ function shortenAccountId(accountId: string) {
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   if (href === "/nfts" && (pathname === "/rights" || pathname.startsWith("/rights/"))) return true;
+  if (href === "/nfts" && pathname === "/gallery") return true;
   if (href === "/campaigns" && pathname.startsWith("/workspace/")) return true;
   return pathname === href || pathname.startsWith(`${href}/`);
 }
@@ -143,6 +145,7 @@ export default function DashboardShell({
           })}
         </nav>
 
+        <Link href="/explore" aria-label="Explore Zinc" title="Explore Zinc" aria-current={pathname === "/explore" ? "page" : undefined} className={`mt-3 flex h-11 w-11 items-center justify-center rounded-2xl ${pathname === "/explore" ? "bg-[#ff6b5f]/15 text-[#ff9988]" : "text-[#8da0ba] hover:bg-[#112441]"}`}><Compass size={19} /></Link>
         <span className="mt-5 text-[9px] font-semibold uppercase tracking-widest text-[#8da0ba]">Testnet</span>
       </aside>
 
@@ -172,6 +175,7 @@ export default function DashboardShell({
             </div>
 
             <div className="zinc-header-actions flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+            <Link href="/explore" className="inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#0f213d] px-3 py-3 text-xs font-semibold text-[#ff9988] sm:text-sm"><Compass size={16} />Explore Zinc</Link>
             {headerActions}
             {accountId ? (
               <div className="flex min-w-0 max-w-full items-center gap-2">

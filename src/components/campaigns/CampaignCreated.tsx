@@ -6,7 +6,7 @@ import { CheckCircle2 } from "lucide-react";
 import type { CampaignConfirmation } from "../../lib/campaign-confirmation";
 import { getCampaign, getCampaignRights, type OnChainCampaign, type OnChainRevenueRight } from "../../lib/zinc-contract";
 import { useReadRefresh } from "../data/useReadRefresh";
-import RevenueRightCard from "../nfts/RevenueRightCard";
+import RevenueRightCard, { rightHref } from "../nfts/RevenueRightCard";
 import CampaignPaymentLink from "./CampaignPaymentLink";
 
 type Details = { campaign: OnChainCampaign | null; rights: OnChainRevenueRight[] | null };
@@ -50,6 +50,7 @@ export function CampaignCreatedView({ confirmation: { campaignId, hash }, campai
       {!campaign && campaignId !== null && <p className="mt-4 text-sm text-white">Campaign #{campaignId}</p>}
       <div className="mt-5 flex flex-wrap gap-3">
         {campaignId !== null && <Link href={`/campaigns/${campaignId}`} className="rounded-xl bg-gradient-to-r from-[#ff685b] to-[#ff8a9c] px-4 py-3 text-sm font-semibold text-white">Open your campaign</Link>}
+        {campaignId !== null && <Link href="#created-rights" className="rounded-xl border border-[#69dab8]/30 px-4 py-3 text-sm font-semibold text-[#69dab8]">Inspect the campaign’s minted NFTs ↓</Link>}
         <Link href="/campaigns" className="rounded-xl border border-[#293954] px-4 py-3 text-sm text-[#A9B6CF]">All campaigns</Link>
         <Link href="/nfts" className="rounded-xl border border-[#293954] px-4 py-3 text-sm text-[#FF8E9C]">View NFTs owned by your wallet</Link>
       </div>
@@ -57,13 +58,13 @@ export function CampaignCreatedView({ confirmation: { campaignId, hash }, campai
       <p className="mt-4 text-xs leading-5 text-[#71809D]">Contributor NFTs belong to the recipient wallets you specified. Creating a campaign does not mean your wallet owns every right. Treasury remains account-based.</p>
     </section>
     {campaignId === null ? <section className="rounded-2xl border border-[#293954] bg-[#122344] p-6"><h3 className="font-semibold text-white">Find your campaign</h3><p className="mt-3 text-sm leading-6 text-[#A9B6CF]">The transaction succeeded, but its returned campaign ID could not be read. Open the transaction or campaign list to find it. This is not a failed creation; do not submit the same campaign again.</p></section> : <>
-      <CampaignPaymentLink campaignId={campaignId} />
-      <section className="rounded-2xl border border-[#293954] bg-[#122344] p-6 md:p-8">
+      <section id="created-rights" className="scroll-mt-6 rounded-2xl border border-[#293954] bg-[#122344] p-6 md:p-8">
         <div className="flex flex-wrap items-center justify-between gap-3"><h3 className="text-xl font-semibold text-white">Your campaign&apos;s revenue-right NFTs</h3><button type="button" onClick={onRefresh} disabled={loading} className="rounded-xl border border-[#293954] px-4 py-2 text-sm text-[#A9B6CF] disabled:opacity-40">Refresh campaign &amp; rights</button></div>
         {loading ? <p role="status" className="mt-5 text-sm text-[#A9B6CF]">Reading the created campaign and NFT rights from NEAR...</p>
           : !campaign || !rights ? <p role="alert" className="mt-5 text-sm leading-6 text-[#FF8E9C]">Creation is confirmed, but the complete campaign and NFT details could not be loaded yet. Refresh this section or open your campaign. Do not create it again.</p>
-          : <><p className="mt-4 text-sm leading-6 text-[#A9B6CF]">{rights.length} revenue-right {rights.length === 1 ? "NFT" : "NFTs"} read from the contract. These cards show real token IDs and current owners.</p><div className="mt-5 grid gap-4 sm:grid-cols-2">{rights.map((right) => <RevenueRightCard key={right.token_id} right={right} campaignName={campaign.name} />)}</div></>}
+          : <><p className="mt-4 text-sm leading-6 text-[#A9B6CF]">{rights.length} revenue-right {rights.length === 1 ? "NFT" : "NFTs"} read from the contract. These cards show real token IDs and current owners.</p><div className="mt-5 grid gap-4 sm:grid-cols-2">{rights.map((right) => <div key={right.token_id} className="min-w-0"><RevenueRightCard right={right} campaignName={campaign.name} /><Link href={rightHref(right.token_id)} className="mt-3 block break-all text-sm font-semibold text-[#ff9988]">Open minted NFT · {right.token_id} ↗</Link></div>)}</div><Link href={`/campaigns/${campaignId}#project-team`} className="mt-5 inline-flex text-sm font-semibold text-[#ff9988]">View project team &amp; allocations ↗</Link></>}
       </section>
+      <CampaignPaymentLink campaignId={campaignId} />
       <section className="rounded-2xl border border-[#293954] bg-[#122344] p-6"><h3 className="font-semibold text-white">What comes next</h3><p className="mt-3 text-sm leading-6 text-[#A9B6CF]">Share the support link. Revenue can be deposited during the campaign&apos;s active dates. Current holders earn their share of new deposits; transferring a right keeps previously earned revenue with its former owner.</p><Link href={`/workspace/${campaignId}`} className="mt-4 inline-flex text-sm text-[#FF8E9C]">Open the creator / holder workspace ↗</Link></section>
     </>}
   </div>;

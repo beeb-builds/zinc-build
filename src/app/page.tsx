@@ -1,5 +1,5 @@
-import DashboardOverview from "../components/dashboard/DashboardOverview";
+import PersonalDashboard from "../components/dashboard/PersonalDashboard";
 
 export default function Home() {
-  return <DashboardOverview />;
+  return <PersonalDashboard />;
 }

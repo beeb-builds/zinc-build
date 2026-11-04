@@ -28,6 +28,8 @@ export default function NewCampaignPage() {
         </h2>
 
         <p className="mt-2 max-w-2xl text-sm leading-6 text-[#7085a2]">
+          Your project is represented by an on-chain campaign. Add your team’s
+          contributor roles and recipient accounts, then define the agreement.
           Set the campaign period, contributors and exact revenue allocation.
           Confirm the agreement in your wallet to create the campaign on NEAR
           Testnet and mint a revenue-right NFT for each contributor.

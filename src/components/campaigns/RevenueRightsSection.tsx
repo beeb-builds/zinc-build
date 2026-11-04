@@ -6,6 +6,8 @@ import { yoctoToNear } from "near-api-js";
 import { useWallet } from "../wallet/WalletProvider";
 import { useReadRefresh } from "../data/useReadRefresh";
 import RevenueRightCard from "../nfts/RevenueRightCard";
+import ProjectTeamRoster from "./ProjectTeamRoster";
+import { validateCampaignRights } from "../../lib/public-rights";
 import { getCampaignRights, getClaimable, getClaimed, type OnChainCampaign, type OnChainRevenueRight } from "../../lib/zinc-contract";
 
 const badge = "inline-flex rounded-full border border-[#FF8E9C]/25 bg-[#FF8E9C]/10 px-3 py-1 text-xs font-semibold text-[#FF8E9C]";
@@ -22,13 +24,8 @@ export default function RevenueRightsSection({ campaign }: { campaign: OnChainCa
     setRights(null);
     setError(false);
     getCampaignRights(campaign.id).then((result) => {
-      // Do not silently show a partial or mismatched set as complete ownership data.
-      if (!Array.isArray(result) || result.length !== campaign.contributors.length ||
-        new Set(result.map((right) => right.contributor_index)).size !== result.length ||
-        result.some((right) => right.campaign_id !== campaign.id || !campaign.contributors[right.contributor_index] || !right.owner_id)) {
-        throw new Error("Incomplete campaign rights.");
-      }
-      if (!cancelled) setRights(result);
+      const verified = validateCampaignRights(campaign, result);
+      if (!cancelled) setRights(verified);
     }).catch(() => { if (!cancelled) setError(true); });
     return () => { cancelled = true; };
   }, [campaign, refresh]);
@@ -36,15 +33,17 @@ export default function RevenueRightsSection({ campaign }: { campaign: OnChainCa
   const relevant = Boolean(accountId && (campaign.contributors.some((contributor) => contributor.account_id === accountId) || rights?.some((right) => right.owner_id === accountId)));
 
   return (
-    <section className="rounded-2xl border border-[#293954] bg-[#122344] p-6 md:p-8">
+    <section id="revenue-rights" className="scroll-mt-6 rounded-2xl border border-[#293954] bg-[#122344] p-6 md:p-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-xl font-semibold text-white">Revenue Rights</h2>
+        <h2 className="text-xl font-semibold text-white">Project team &amp; revenue rights</h2>
         <button type="button" onClick={refreshData} disabled={!rights && !error} className="rounded-xl border border-[#293954] px-4 py-2 text-sm text-[#A9B6CF] hover:text-white disabled:opacity-40">Refresh rights</button>
       </div>
       <p className="mt-4 text-sm leading-6 text-[#A9B6CF]">Future revenue follows the current NFT owner. Revenue earned before a transfer remains with the previous owner.</p>
       <p className="mt-2 text-xs leading-5 text-[#71809D]">Original contributor: the account allocated the right at campaign creation. Current NFT owner: the account that controls its future revenue now.</p>
       {error && <p role="alert" className="mt-4 text-sm text-[#FF8E9C]">NFT ownership could not be loaded. Original allocations are shown below; current ownership is unavailable. Use Refresh rights to retry.</p>}
       {!rights && !error && <p role="status" className="mt-4 text-sm text-[#A9B6CF]">Loading current revenue-right owners...</p>}
+      <ProjectTeamRoster campaign={campaign} rights={rights} accountId={accountId} />
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-[#293954] pt-6"><h3 className="text-lg font-semibold text-white">Revenue Rights · Contributor NFTs</h3><Link href="/gallery" className="text-sm font-semibold text-[#ff9988]">Browse the public NFT gallery ↗</Link></div>
       <div className="mt-5 grid items-start gap-4 xl:grid-cols-2">
         {campaign.contributors.map((contributor, index) => {
           const right = rights?.find((item) => item.contributor_index === index);

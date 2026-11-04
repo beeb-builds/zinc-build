@@ -44,6 +44,8 @@ let html = render();
 assert.ok(html.includes('href="/campaigns/7"')); assert.ok(html.includes('href="/pay/7"')); assert.ok(html.includes('href="/workspace/7"'));
 assert.ok(html.includes(`/rights/${encodeURIComponent(rights[0].token_id)}`)); assert.ok(html.includes("alice.testnet"));
 assert.ok(html.includes("60")); assert.ok(html.includes("real token IDs and current owners"));
+assert.ok(html.includes('href="#created-rights"')); assert.ok(html.includes('id="created-rights"'));
+assert.ok(html.includes('href="/campaigns/7#project-team"')); assert.ok(html.includes("Open minted NFT"));
 assert.ok(!html.includes("<script>")); assert.ok(html.includes("&lt;script&gt;"));
 assert.ok(!html.includes("Draft preview"));
 html = render({ campaign: null, rights: null });

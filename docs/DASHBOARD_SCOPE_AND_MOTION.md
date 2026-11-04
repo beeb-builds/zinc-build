@@ -1,9 +1,9 @@
 # Dashboard scope and motion
 
-The dashboard separates the connected account from shared platform data.
+The personal dashboard at `/` is separate from shared platform data at `/explore`.
 
 - **Your wallet:** total claimable and claimed revenue, currently owned revenue-right NFTs, and related campaigns. Relationships include campaign creation, original contributor allocation, current NFT ownership, treasury shares, or nonzero historical account earnings. Being a campaign creator does not itself grant revenue.
-- **Platform overview:** deposited revenue across all campaigns, active/total campaigns, NFT supply, campaign revenue chart, allocation example, and recent public campaigns. These values intentionally stay the same when switching wallets.
+- **Platform overview (`/explore`):** deposited revenue across all campaigns, active/total campaigns, NFT supply, campaign revenue chart, allocation example, and recent public campaigns. These values intentionally stay the same when switching wallets and are not shown on the personal home page.
 
 Personal values use the existing contract read helpers and exact BigInt arithmetic. Current ownership comes from paginated `nft_tokens_for_owner`. Historical balances come from `get_claimable` and `get_claimed` for every campaign, so transferring an NFT does not hide previously earned revenue. Unavailable reads are labeled unavailable rather than zero. Account and campaign-snapshot checks prevent old-wallet values from appearing during a switch, refresh, or late response.
 

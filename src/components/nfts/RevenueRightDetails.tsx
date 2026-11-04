@@ -45,6 +45,7 @@ export default function RevenueRightDetails({ tokenId }: { tokenId: string }) {
   return <div className="space-y-6">
     <div className="flex flex-wrap items-center justify-between gap-3">
       <Link href="/nfts" className="inline-flex items-center gap-2 text-sm text-[#A9B6CF] hover:text-white"><ArrowLeft size={16} /> My NFTs</Link>
+      <Link href="/gallery" className="inline-flex text-sm font-semibold text-[#FF8E9C]">Public NFT gallery ↗</Link>
       <button type="button" onClick={refreshData} disabled={state === "loading"} className="rounded-xl border border-[#293954] px-4 py-2 text-sm text-[#A9B6CF] hover:text-white disabled:opacity-40">Refresh ownership</button>
     </div>
     {state === "loading" && <div role="status" className={panel}><p className="text-sm text-[#A9B6CF]">Reading this NFT and its revenue agreement from NEAR...</p><div aria-hidden="true" className="mt-5 h-64 rounded-xl bg-[#0B1933] motion-safe:animate-pulse" /></div>}
