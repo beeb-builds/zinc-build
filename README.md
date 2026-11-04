@@ -199,7 +199,7 @@ After a further user-confirmed transfer, block **276058888** showed B owning it
 again, with those same claimed/deposit totals and zero claimable for both.
 Always inspect the live owner rather than assuming a recorded snapshot persists.
 
-Latest frontend verification: **23 regression scripts**, lint and production
+Latest frontend verification: **29 regression scripts**, lint and production
 build passed. These fixtures cover exact amounts, wallet lifecycle, recovery,
 ownership refresh, authorization and RPC failures. They do not certify every
 wallet/browser combination. From the repo root:
@@ -224,8 +224,15 @@ cargo near build non-reproducible-wasm --no-abi
 
 [The sandbox rehearsal](scripts/nft-sandbox/README.md) requires a running Docker
 engine. It uses a reconstructed pre-NFT fixture, not an exact downloaded
-production backup. Contract/sandbox checks were not rerun for this documentation
-update. Do not run migration initializers as part of a live demo.
+production backup. On November 4, `cargo test --offline` passed all **69** unit
+tests. The Docker sandbox rehearsal was not rerun for this documentation update.
+Do not run migration initializers as part of a live demo.
+
+The [release acceptance report](docs/RELEASE_ACCEPTANCE.md) distinguishes hosted
+public-page checks, recorded financial evidence and pending manual checks. A
+read-only recheck at finalized block **276220305** found campaign #7's right
+owned by A, with deposits and claimed values unchanged. Ownership is a
+point-in-time observation, not a permanent property of the demo.
 
 ## Scope and limits
 
@@ -247,12 +254,21 @@ update. Do not run migration initializers as part of a live demo.
 
 Target track: **NFTs That Do Something (nfts)**. Zinc demonstrates revenue and
 access controlled by ownership. The [official rules](https://nearhackathon.com/HACKATHON.md),
-checked November 3, 2026 (Q-011 and Tracks), make integrations optional and
+checked November 4, 2026 (Q-011 and Tracks), make integrations optional and
 starter prompts examples. NFT-controlled subaccounts are not implemented here.
 Recheck live rules before submission.
 
 The app started from create-next-app, uses the dependencies in package.json /
-Cargo.toml, and was developed with Codex assistance. Before public submission,
-document actual baseline/submission refs and dates for earlier work, review
-files/history for secrets, and select/add a license. These release/provenance
-checks have not been certified by this README.
+Cargo.toml, and was developed with Codex assistance. The earliest recorded local
+commit is `d14f375d74949ad288ebeb3bd0378c9e50c3228d` (October 27, 2026), which
+contains only `.gitignore`. The reviewed application release is
+`c80fd0a5c2c3890095d8f6c13cfdee1f7f4f11d6` (November 4). See the
+[recorded source comparison](https://github.com/beeb-builds/zinc-build/compare/d14f375d74949ad288ebeb3bd0378c9e50c3228d...c80fd0a5c2c3890095d8f6c13cfdee1f7f4f11d6).
+Commit dates establish repository history, not when all code was first written.
+Earlier Zinc work still needs owner confirmation; see the
+[submission checklist](docs/SUBMISSION_CHECKLIST.md) before submission.
+
+## License
+
+Zinc's original source code is licensed under the [MIT License](LICENSE).
+Third-party dependencies retain their respective licenses.

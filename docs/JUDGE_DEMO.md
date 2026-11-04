@@ -21,8 +21,10 @@ new campaigns an active UTC range with enough time for the demo.
 
 | Action | Expected result |
 | --- | --- |
-| Open `/` | Live totals and deposits by campaign; disconnected wallet earnings state. |
-| Open `/campaigns/7` | Zinc Acceptance Test, 60% Artist right, 40% treasury, original contributor versus current owner. Recorded deposits: 0.02 NEAR. |
+| Open `/` | Personal dashboard and onboarding. Disconnected visitors see a connect-wallet state; connected visitors see their own earnings and rights. |
+| Open `/explore` | Shared platform totals and deposited revenue by campaign. These figures are intentionally the same for all wallets. |
+| Open `/gallery` | Public gallery of actual minted revenue-right NFTs, searchable without connecting a wallet. Open a card to inspect its token and current owner. |
+| Open `/campaigns/7#project-team` | Creator, original contributor, current NFT holder, role/share and separate account-based treasury. Recorded deposits: 0.02 NEAR. |
 | Open `/rights/campaign%3A7%3Aright%3A0` | Actual NFT, current owner and available ownership evidence, with coverage limits. |
 | Open `/transactions` and select campaign #7 | Available creation/deposit/transfer/claim evidence and explorer links. A fresh local database may need imports by hash/signer. |
 | Open `/workspace/7` disconnected | Access explanation and wallet connection state, without private brief content. |
@@ -88,6 +90,11 @@ A further user-confirmed transfer put ownership back with B at block
 **276058888**, with the same claimed totals, zero claimable and 0.02 deposited.
 These later transfers did not repeat the deposits or claims in the core scenario.
 
+The read-only recheck on **November 4, 2026, 16:35 UTC**, at finalized block
+**276220305**, found A owning the right again. Campaign #7 still recorded
+0.02 NEAR deposited, A claimed 0.006, B claimed 0.014, and both claimable zero.
+This recheck submitted no transaction and does not replace a fresh signed demo.
+
 For fresh runs, use `node scripts/read-wallet-baseline.mjs A_PUBLIC_ID B_PUBLIC_ID`
 with actual public IDs between stages. It pins views to one finalized block and
 records exact strings. It never signs/submits or proves account control.
@@ -108,16 +115,15 @@ Record a fresh sequence or label recorded evidence. Never combine different
 campaigns/pending prompts into a fabricated success. Native support is a campaign
 deposit, not an NFT sale.
 
-## Submission preparation still required
+## Release and submission preparation
 
-- Review files/history for keys and personal data before publishing. No push or
-  publication is performed by this guide.
-- Select a license; document baseline/submission refs, earlier work, AI/library
-  use, team and submission details.
-- Use persistent HTTPS hosting if available; otherwise provide reproducible
-  local setup and video. Test from a clean checkout/database.
-- Recheck [official rules](https://nearhackathon.com/HACKATHON.md). As checked
-  November 3, integrations are optional (Q-011), Testnet is eligible (Q-010), and
-  starter prompts are examples. Published deadline: November 14, 2026, 23:59 UTC.
-- The human publishes the demo post and confirms the exact submission payload.
-  This guide does not submit anything or promise a prize.
+The repository is public and the app is hosted at
+[Zinc on Railway](https://zinc-build-production.up.railway.app). Hosting uses a
+persistent volume; a fresh hosted signed-wallet walkthrough remains separate
+from the public-page checks. Start the recording with the public NFT gallery,
+then show a project's roster and explain why its NFT controls future revenue.
+
+Use the [release evidence](RELEASE_ACCEPTANCE.md) and
+[submission checklist](SUBMISSION_CHECKLIST.md) for passed checks and remaining
+owner actions. The human publishes the demo post and confirms the exact
+submission payload. This guide does not submit anything or promise a prize.

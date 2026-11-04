@@ -9,7 +9,22 @@ Wallet B was replaced by the user on 2026-11-03 after a wallet connection issue:
 `d500c193b9052dd191dc69793180e5dec0cb3ee2bec9adaec646753487646671`
 
 Both public IDs are now recorded. No keys or recovery phrases are needed.
-The signed two-account execution checklist remains pending.
+The core signed two-account execution passed on November 3. Remaining reload,
+hosted-origin and physical-device checks are separate from that completed run.
+
+## Latest read-only recheck: November 4
+
+At **2026-11-04T16:35:51.586Z**, finalized block **276220305**
+(`HPQmgV9ZYSKBqFZbUBtMhssNzqTLgqUZCWEFEysXo17y`) contained eight campaigns.
+Campaign #7 still had 0.02 NEAR deposited, A claimed 0.006, B claimed 0.014,
+and both accounts had zero claimable. Its `campaign:7:right:0` NFT belonged to
+**A** at this block; later user transfers supersede B's ownership in the core
+scenario. Across all campaigns A had claimed 0.018 NEAR, B 0.014 NEAR.
+
+Captured using `scripts/read-wallet-baseline.mjs`, with every view pinned to
+the same finalized block. Local evidence file:
+`data/wallet-acceptance-276220305-1793810151586.json` (gitignored).
+This check did not sign, transfer, deposit, claim or prove control of an account.
 
 ## Recorded starting evidence
 

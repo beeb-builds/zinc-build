@@ -1,9 +1,24 @@
 # Zinc readiness checkpoint
 
-Audit date: 2026-11-02. This is the finish-line checklist, not a new feature backlog.
+Latest audit: 2026-11-05 (WAT). This is the finish-line checklist, not a new feature backlog.
 Each next batch should contain two named tasks with results recorded here.
 
-## Latest progress: batch 9
+## Current release checkpoint: November 4
+
+The public repository and Railway deployment are live. Personal onboarding,
+Explore Zinc, the public NFT gallery and project team rosters are implemented.
+The current release is `c80fd0a5c2c3890095d8f6c13cfdee1f7f4f11d6`.
+See [release acceptance](RELEASE_ACCEPTANCE.md) for dated verification and
+[submission preparation](SUBMISSION_CHECKLIST.md) for remaining owner actions.
+Old hosting failures below are historical records, not the current deployment.
+
+Two finishing tasks: audit the release evidence and prepare the README/judge
+walkthrough. MIT is now selected and the LICENSE file is added. Physical-phone
+wallet acceptance, fresh hosted signed flows, development-provenance confirmation
+and the human's demo post remain outstanding.
+No new contract deployment is needed for these tasks.
+
+## Historical progress: batch 9
 
 [QA_BATCH_9.md](QA_BATCH_9.md): phone layout/font-cascade fixes, compact bottom
 navigation, mobile campaign cards and reduced-motion-aware NFT animation.
