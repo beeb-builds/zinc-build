@@ -1,0 +1,818 @@
+{
+  "framework": "near-sandbox 0.3.4 + near-api-js 7.2.0",
+  "requestedNearcore": "2.14.0",
+  "localOnly": true,
+  "steps": [
+    "Atomic NFT upgrade and migration preserved campaigns, deposits, entire claimed/pending ledger, and all beneficiary views."
+  ],
+  "transactions": {
+    "zinc-create-0": {
+      "hash": "6xuj7m2VC1F4Q1qFTQ1cE81r1kfUSRcUnPwmFtMweBop",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTA5MzkyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIwIn0="
+      },
+      "gas": "1880033301821",
+      "tgas": "1.880033301821",
+      "receipts": [
+        {
+          "id": "3RkvbKbiTXQXKCTSxjSyzVYLZuhBronjzFgKG8Yprf9r",
+          "executor": "zinc.sandbox",
+          "gas": "1325569270116",
+          "status": {
+            "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTA5MzkyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIwIn0="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "G4bpJtSWjCwn47Ycroq6RsyKiN6HxQtFwAtPry75BKFo"
+          ]
+        },
+        {
+          "id": "G4bpJtSWjCwn47Ycroq6RsyKiN6HxQtFwAtPry75BKFo",
+          "executor": "sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "zinc-deposit-0": {
+      "hash": "3hQmtBQN5tbAS8FZDwXEYSqvEQXuahD5ggoK67MRZJGK",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTA5MzkyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCJ9"
+      },
+      "gas": "1847962746124",
+      "tgas": "1.847962746124",
+      "receipts": [
+        {
+          "id": "2GK3DQm6LLD83FkJJXBstC75FovFr2dvufN22SbhoF8R",
+          "executor": "zinc.sandbox",
+          "gas": "1315194804744",
+          "status": {
+            "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTA5MzkyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCJ9"
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "5ABiQdg61He8tnqoFX3gtzRAchoHRutxDwmdkvPpEgPG"
+          ]
+        },
+        {
+          "id": "5ABiQdg61He8tnqoFX3gtzRAchoHRutxDwmdkvPpEgPG",
+          "executor": "depositor.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "zinc-create-1": {
+      "hash": "6Txzc2h2K2NBRwUEZANGxmDt3BUpqfErx3cgAs1NjtGH",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MSwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAxIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTEwOTA5LCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIwIn0="
+      },
+      "gas": "1914798119140",
+      "tgas": "1.914798119140",
+      "receipts": [
+        {
+          "id": "ECPJU1GLQgqErFvqqTUjmdjED1XGRxkKut4ZtqtCG4mT",
+          "executor": "zinc.sandbox",
+          "gas": "1360334087435",
+          "status": {
+            "SuccessValue": "eyJpZCI6MSwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAxIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTEwOTA5LCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIwIn0="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "AhfzByeXLqWpiQEbi2j6xmBJ9mXSvRBXJQQKicThnbuy"
+          ]
+        },
+        {
+          "id": "AhfzByeXLqWpiQEbi2j6xmBJ9mXSvRBXJQQKicThnbuy",
+          "executor": "sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "zinc-deposit-1": {
+      "hash": "Gj6nJNqJ7U1JscxGmzth6fp9hy9KgKq6WZ1qfyYb6nzv",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MSwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAxIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTEwOTA5LCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiI4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIn0="
+      },
+      "gas": "1882400419002",
+      "tgas": "1.882400419002",
+      "receipts": [
+        {
+          "id": "CvKADckADxZNw2bctxToeJmdjYfym2b58XJMcxR8VjeJ",
+          "executor": "zinc.sandbox",
+          "gas": "1349632477622",
+          "status": {
+            "SuccessValue": "eyJpZCI6MSwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAxIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTEwOTA5LCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiI4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIn0="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "HWmzXV2wtqyKnvDYKrT1eZBJdAQ2x7h9QEDtkQsVCGpj"
+          ]
+        },
+        {
+          "id": "HWmzXV2wtqyKnvDYKrT1eZBJdAQ2x7h9QEDtkQsVCGpj",
+          "executor": "depositor.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "zinc-legacy-treasury-claim": {
+      "hash": "Bzon4XXMtSQ7MhMHW8S43ZFEKdPvJSg4e1xHiob29d7k",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "gas": "4572166029623",
+      "tgas": "4.572166029623",
+      "receipts": [
+        {
+          "id": "HNvXo7u8s6NUYx5hrMuJsiMgDhvLm6WwYfKEAmDQpSuH",
+          "executor": "zinc.sandbox",
+          "gas": "1996200478414",
+          "status": {
+            "SuccessReceiptId": "7UZNhBacHphvsDk92QZy9cTpyf9kgRubABdqr9yaBtAH"
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "HW4Qxpbi5qfCEojHaDFDPX1eK2rAUjYRk3Q8Nsp18wgs",
+            "7UZNhBacHphvsDk92QZy9cTpyf9kgRubABdqr9yaBtAH",
+            "7s3F7P76WWF4dpFRopBox3RgjgBtxS9tRNKGq1QUzzTY"
+          ]
+        },
+        {
+          "id": "HW4Qxpbi5qfCEojHaDFDPX1eK2rAUjYRk3Q8Nsp18wgs",
+          "executor": "treasury.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "A4DyzJTdj57Wa9crCyvNCK1C7DRTUSGVdZNRejjDuvWn"
+          ]
+        },
+        {
+          "id": "A4DyzJTdj57Wa9crCyvNCK1C7DRTUSGVdZNRejjDuvWn",
+          "executor": "treasury.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        },
+        {
+          "id": "7UZNhBacHphvsDk92QZy9cTpyf9kgRubABdqr9yaBtAH",
+          "executor": "zinc.sandbox",
+          "gas": "1373745289759",
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "8YSzdBxvrCGk7bGfUaoY1bR3mhMxdEm3U7eyuSGA4tSr"
+          ]
+        },
+        {
+          "id": "8YSzdBxvrCGk7bGfUaoY1bR3mhMxdEm3U7eyuSGA4tSr",
+          "executor": "treasury.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        },
+        {
+          "id": "7s3F7P76WWF4dpFRopBox3RgjgBtxS9tRNKGq1QUzzTY",
+          "executor": "treasury.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "migrationAtomic": {
+      "hash": "GyNAAtbWWieEKt2EWSa9UduqkjuaUxnUT1nxRE1ZkW2V",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": ""
+      },
+      "gas": "43940512759264",
+      "tgas": "43.940512759264",
+      "receipts": [
+        {
+          "id": "GoadsfrY8jBNeq8bb3woVt6a3NHT2G4qEVchwtKnFgor",
+          "executor": "zinc.sandbox",
+          "gas": "40483931169940",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"alice.sandbox\",\"token_ids\":[\"campaign:0:right:0\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"developer.sandbox\",\"token_ids\":[\"campaign:0:right:1\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"promoter.sandbox\",\"token_ids\":[\"campaign:0:right:2\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"alice.sandbox\",\"token_ids\":[\"campaign:1:right:0\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"developer.sandbox\",\"token_ids\":[\"campaign:1:right:1\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"promoter.sandbox\",\"token_ids\":[\"campaign:1:right:2\"]}]}"
+          ],
+          "generatedReceiptIds": [
+            "AqdKjhx9SHy4eSnJC3WjDND9w3vCQXVrq6U5tPiYQhc"
+          ]
+        },
+        {
+          "id": "AqdKjhx9SHy4eSnJC3WjDND9w3vCQXVrq6U5tPiYQhc",
+          "executor": "zinc.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "nft-transfer-alice-bob": {
+      "hash": "5ANRKske9JPeG9q9Q1aQ7gSHPKbLXgzcYqYUQ9aa1kog",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": ""
+      },
+      "gas": "3981530890366",
+      "tgas": "3.981530890366",
+      "receipts": [
+        {
+          "id": "3459jEHDiELQrKkx4DYooMpKXnDSmB3dotsd2XBFqt7t",
+          "executor": "zinc.sandbox",
+          "gas": "3444232996061",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_transfer\",\"data\":[{\"old_owner_id\":\"alice.sandbox\",\"new_owner_id\":\"bob.sandbox\",\"token_ids\":[\"campaign:0:right:0\"],\"memo\":\"Local migration rehearsal\"}]}"
+          ],
+          "generatedReceiptIds": [
+            "EEe9noHecbvUKR92zMXUaXXkBSuJ6uNWvYBqyQ9dTwn1"
+          ]
+        },
+        {
+          "id": "EEe9noHecbvUKR92zMXUaXXkBSuJ6uNWvYBqyQ9dTwn1",
+          "executor": "alice.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "post-transfer-deposit": {
+      "hash": "5TCSAJwAEST6vQS8hEoWmyMKskyXjZYj7PrPPEuA8VcX",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTA5MzkyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCJ9"
+      },
+      "gas": "2252137048326",
+      "tgas": "2.252137048326",
+      "receipts": [
+        {
+          "id": "2A6uZRHBW43ZiSoAiFcEf5N3TYtFrAC79tEsrWA2tBog",
+          "executor": "zinc.sandbox",
+          "gas": "1719369106946",
+          "status": {
+            "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTA5MzkyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCJ9"
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "2mQeaytdKUobyHUJerUXbr8PDtMP8nFUKU6rJvfjc6qv"
+          ]
+        },
+        {
+          "id": "2mQeaytdKUobyHUJerUXbr8PDtMP8nFUKU6rJvfjc6qv",
+          "executor": "depositor.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "post-transfer-bob-claim": {
+      "hash": "3SPAeJWr5ZGpcucKTS4R77xxFAHmkXiSBU4JWBz5CQN5",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "gas": "5700343434023",
+      "tgas": "5.700343434023",
+      "receipts": [
+        {
+          "id": "7Kv7utabmhvEth85v4f3BphpEp5eRWseNb8369bUZ9WG",
+          "executor": "zinc.sandbox",
+          "gas": "2756450166592",
+          "status": {
+            "SuccessReceiptId": "5hNLiwDAbW6dow6cGXFy33brA2KBZNDea5qrbgnyzkFq"
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "8hWRv2SQ65remXXVTipFqaZRLpoTbF1HNhxHTC3Qj2YR",
+            "5hNLiwDAbW6dow6cGXFy33brA2KBZNDea5qrbgnyzkFq",
+            "CVnAebLUq9wuySijMPHwxUCiLqZMRX9DiNQ8qnT2U8GN"
+          ]
+        },
+        {
+          "id": "8hWRv2SQ65remXXVTipFqaZRLpoTbF1HNhxHTC3Qj2YR",
+          "executor": "bob.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "8pP1i4fYQ8PBCeydHdQcwzvoWLuwpoJWnocGRJRJ5BgG"
+          ]
+        },
+        {
+          "id": "8pP1i4fYQ8PBCeydHdQcwzvoWLuwpoJWnocGRJRJ5BgG",
+          "executor": "bob.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        },
+        {
+          "id": "5hNLiwDAbW6dow6cGXFy33brA2KBZNDea5qrbgnyzkFq",
+          "executor": "zinc.sandbox",
+          "gas": "1741673005981",
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "DKGNLk7uQwCWMrsGdswWtz2es4LGXoJvAbi7rMqiXZnQ"
+          ]
+        },
+        {
+          "id": "DKGNLk7uQwCWMrsGdswWtz2es4LGXoJvAbi7rMqiXZnQ",
+          "executor": "bob.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        },
+        {
+          "id": "CVnAebLUq9wuySijMPHwxUCiLqZMRX9DiNQ8qnT2U8GN",
+          "executor": "bob.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "post-transfer-alice-claim": {
+      "hash": "Ac8AvYQV8VijyTUpmtJjBAjG78PzWAwoG28zEwT5oAF8",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "gas": "5641153124096",
+      "tgas": "5.641153124096",
+      "receipts": [
+        {
+          "id": "78Pw74Dk8touboD4ysLKuWxyP7qJGKKVzX96qshWtGrJ",
+          "executor": "zinc.sandbox",
+          "gas": "2690704419872",
+          "status": {
+            "SuccessReceiptId": "2GUsV5MqbPs3r1yb4YnHE3nxTFiNHBnmoyEUjSUrt2sm"
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "6oPquwqmLCEVo8MAwgc5ibTfNS2Gyv9UL9JU9ZBuoE9T",
+            "2GUsV5MqbPs3r1yb4YnHE3nxTFiNHBnmoyEUjSUrt2sm",
+            "6QGyPhHtuRwdPd12bp192WLyfrasBzwhYdXP8brHwKRg"
+          ]
+        },
+        {
+          "id": "6oPquwqmLCEVo8MAwgc5ibTfNS2Gyv9UL9JU9ZBuoE9T",
+          "executor": "alice.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "8MjLKeyFVnbtNYipMQ37By5zZtH8dGqgkomGuK2QwWfY"
+          ]
+        },
+        {
+          "id": "8MjLKeyFVnbtNYipMQ37By5zZtH8dGqgkomGuK2QwWfY",
+          "executor": "alice.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        },
+        {
+          "id": "2GUsV5MqbPs3r1yb4YnHE3nxTFiNHBnmoyEUjSUrt2sm",
+          "executor": "zinc.sandbox",
+          "gas": "1748228442774",
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "EA73M9MG4aseKHuNhB1M88f3WqZAinNE9gdir1h6hznj"
+          ]
+        },
+        {
+          "id": "EA73M9MG4aseKHuNhB1M88f3WqZAinNE9gdir1h6hznj",
+          "executor": "alice.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        },
+        {
+          "id": "6QGyPhHtuRwdPd12bp192WLyfrasBzwhYdXP8brHwKRg",
+          "executor": "alice.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "measure-create-0": {
+      "hash": "2WhZYmpJPhHNhsAKvpTDLgyHRCia7hfV7M5bSGckX9m7",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTIwNzEyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIwIn0="
+      },
+      "gas": "1882313301821",
+      "tgas": "1.882313301821",
+      "receipts": [
+        {
+          "id": "84nehinbgHsnESgXSMKdvpWrEejaKPZvXDqxiqGg5Tfw",
+          "executor": "measure.sandbox",
+          "gas": "1327849270116",
+          "status": {
+            "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTIwNzEyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIwIn0="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "A8qvfutXt935p9YDGVmkJrtP3FtLPkpHPfHDUgg87riz"
+          ]
+        },
+        {
+          "id": "A8qvfutXt935p9YDGVmkJrtP3FtLPkpHPfHDUgg87riz",
+          "executor": "sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "measure-deposit-0": {
+      "hash": "4BBXCkXvaXTKfTJGBNQK4MXTPxGKKTC4wbfCfqRe2Aac",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTIwNzEyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCJ9"
+      },
+      "gas": "1850242746124",
+      "tgas": "1.850242746124",
+      "receipts": [
+        {
+          "id": "DUZGzKntvhAhfhqkesTKhPxAAq1225dDg5dGjqcQ26XW",
+          "executor": "measure.sandbox",
+          "gas": "1317474804744",
+          "status": {
+            "SuccessValue": "eyJpZCI6MCwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAwIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTIwNzEyLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCJ9"
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "AMcHN5d7fQYasAPCEbiToDh4duFNSA8CfVoqBksMjFfn"
+          ]
+        },
+        {
+          "id": "AMcHN5d7fQYasAPCEbiToDh4duFNSA8CfVoqBksMjFfn",
+          "executor": "depositor.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "measure-create-1": {
+      "hash": "F8bmGobDh5i2fkEx39eGomkreg5YR2fVqCdZfiWFyZQp",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MSwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAxIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTIyMjMwLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIwIn0="
+      },
+      "gas": "1917078119140",
+      "tgas": "1.917078119140",
+      "receipts": [
+        {
+          "id": "FHiviiPKDKm9iDsx9aUWxm6KKRdpHz433KJrBdaokJid",
+          "executor": "measure.sandbox",
+          "gas": "1362614087435",
+          "status": {
+            "SuccessValue": "eyJpZCI6MSwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAxIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTIyMjMwLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiIwIn0="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "8SgzH2yyizPdLJ6w3QuMnZ3H8hMqmLjtD1wWtcpBaYde"
+          ]
+        },
+        {
+          "id": "8SgzH2yyizPdLJ6w3QuMnZ3H8hMqmLjtD1wWtcpBaYde",
+          "executor": "sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "measure-deposit-1": {
+      "hash": "B9eWY89C2zpw98Ejrspj2VXGck1kWrrHrDr3qn9vAxag",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "eyJpZCI6MSwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAxIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTIyMjMwLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiI4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIn0="
+      },
+      "gas": "1884680419002",
+      "tgas": "1.884680419002",
+      "receipts": [
+        {
+          "id": "DRKtk7Kj6gbJ3N63MCwHfXDsNxoaAdQqs2VUnCHkVKit",
+          "executor": "measure.sandbox",
+          "gas": "1351912477622",
+          "status": {
+            "SuccessValue": "eyJpZCI6MSwiY3JlYXRvciI6InNhbmRib3giLCJuYW1lIjoiU2FuZGJveCBDYW1wYWlnbiAxIiwiZGVzY3JpcHRpb24iOiJMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuIiwic3RhcnRfdGltZXN0YW1wX21zIjoxNzkzNDU5MDQ3MTAzLCJlbmRfdGltZXN0YW1wX21zIjoxNzkzNTQ1NTA3MTAzLCJjb250cmlidXRvcnMiOlt7InJvbGUiOiJBcnRpc3QiLCJhY2NvdW50X2lkIjoiYWxpY2Uuc2FuZGJveCIsInNoYXJlX2JwcyI6MjUwMH0seyJyb2xlIjoiRGV2ZWxvcGVyIiwiYWNjb3VudF9pZCI6ImRldmVsb3Blci5zYW5kYm94Iiwic2hhcmVfYnBzIjoyMDAwfSx7InJvbGUiOiJQcm9tb3RlciIsImFjY291bnRfaWQiOiJwcm9tb3Rlci5zYW5kYm94Iiwic2hhcmVfYnBzIjoxNTAwfV0sInRyZWFzdXJ5X2FjY291bnQiOiJ0cmVhc3VyeS5zYW5kYm94IiwidHJlYXN1cnlfc2hhcmVfYnBzIjo0MDAwLCJjcmVhdGVkX2F0X21zIjoxNzkzNDU5MTIyMjMwLCJ0b3RhbF9kZXBvc2l0ZWRfeW9jdG8iOiI4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIn0="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "83GyJwvw4ytPeWPfM7sTs6afH7kwu5TmRGmXDMdCwr6U"
+          ]
+        },
+        {
+          "id": "83GyJwvw4ytPeWPfM7sTs6afH7kwu5TmRGmXDMdCwr6U",
+          "executor": "depositor.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "measure-legacy-treasury-claim": {
+      "hash": "CKLhYzqdut1hSjDGmrcuFEZTSygkG3TFXLHrPzUft3qz",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "gas": "4578199999493",
+      "tgas": "4.578199999493",
+      "receipts": [
+        {
+          "id": "HphL5sCtQfkhY4dmCWkMnJsXFEvGuz2cygCUDnbQQvVq",
+          "executor": "measure.sandbox",
+          "gas": "1999524718552",
+          "status": {
+            "SuccessReceiptId": "Fspd2CHCKHgbUt4mthmswV2E61ub8kyd6iEb7heDKmBd"
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "Gom3C9gACpARYeP6fAxcuQLfUV4gk2Jdma8vYywVwKUV",
+            "Fspd2CHCKHgbUt4mthmswV2E61ub8kyd6iEb7heDKmBd",
+            "4XTrs7EwJBUT3RtrCqihaFRXuGBsuznap31ffjKWQco6"
+          ]
+        },
+        {
+          "id": "Gom3C9gACpARYeP6fAxcuQLfUV4gk2Jdma8vYywVwKUV",
+          "executor": "treasury.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "Gg1vpfutPmdK9gEB4opbeUu4fcVyopn6RFWCGphz55z9"
+          ]
+        },
+        {
+          "id": "Gg1vpfutPmdK9gEB4opbeUu4fcVyopn6RFWCGphz55z9",
+          "executor": "treasury.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        },
+        {
+          "id": "Fspd2CHCKHgbUt4mthmswV2E61ub8kyd6iEb7heDKmBd",
+          "executor": "measure.sandbox",
+          "gas": "1376455019491",
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          },
+          "logs": [],
+          "generatedReceiptIds": [
+            "3JYJNWT5uYwJfNuYYjYVHsj7s4mZ2j6GHjVCtZpC4g9K"
+          ]
+        },
+        {
+          "id": "3JYJNWT5uYwJfNuYYjYVHsj7s4mZ2j6GHjVCtZpC4g9K",
+          "executor": "treasury.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        },
+        {
+          "id": "4XTrs7EwJBUT3RtrCqihaFRXuGBsuznap31ffjKWQco6",
+          "executor": "treasury.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    },
+    "migration-only": {
+      "hash": "Dot49QdJdwS9oSq5a1HtEUYuJUu4XzEc6yrtEW2uRN3H",
+      "finalExecutionStatus": "FINAL",
+      "status": {
+        "SuccessValue": ""
+      },
+      "gas": "14947626470336",
+      "tgas": "14.947626470336",
+      "receipts": [
+        {
+          "id": "GeWuf9gYECsBeTf6EcSkvBcZ2AXJibGg9QnzDaFYWJFo",
+          "executor": "measure.sandbox",
+          "gas": "14416353104760",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"alice.sandbox\",\"token_ids\":[\"campaign:0:right:0\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"developer.sandbox\",\"token_ids\":[\"campaign:0:right:1\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"promoter.sandbox\",\"token_ids\":[\"campaign:0:right:2\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"alice.sandbox\",\"token_ids\":[\"campaign:1:right:0\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"developer.sandbox\",\"token_ids\":[\"campaign:1:right:1\"]}]}",
+            "EVENT_JSON:{\"standard\":\"nep171\",\"version\":\"1.0.0\",\"event\":\"nft_mint\",\"data\":[{\"owner_id\":\"promoter.sandbox\",\"token_ids\":[\"campaign:1:right:2\"]}]}"
+          ],
+          "generatedReceiptIds": [
+            "4U6epqEUerdRw1iN5s4aZbcRguQmKNECJUXCan89rJJD"
+          ]
+        },
+        {
+          "id": "4U6epqEUerdRw1iN5s4aZbcRguQmKNECJUXCan89rJJD",
+          "executor": "measure.sandbox",
+          "gas": "223182562500",
+          "status": {
+            "SuccessValue": ""
+          },
+          "logs": [],
+          "generatedReceiptIds": []
+        }
+      ]
+    }
+  },
+  "node": {
+    "version": {
+      "build": "2.14.0",
+      "commit": "bc4e9e8cfb03d9e82f027883055624e18576993e",
+      "rustc_version": "1.95.0",
+      "version": "2.14.0"
+    },
+    "protocolVersion": 88,
+    "chainId": "test-chain-TULAV"
+  },
+  "artifacts": {
+    "legacy": {
+      "size": 185860,
+      "sha256": "57365cb27b361c93302d4bb31a04dc155c4e304ecfe7294eb99b341f41fcfa08"
+    },
+    "nft": {
+      "size": 402252,
+      "sha256": "4a9d7f8ed5cc4aa81e9badbd169ab51dffb8b6b483dc6ee89b556a53198ae4a5"
+    }
+  },
+  "preservation": {
+    "campaignCount": 2,
+    "campaignIds": [
+      0,
+      1
+    ],
+    "financialPrefixByteIdentical": true,
+    "fullLedgerUnchanged": true,
+    "depositedTotalsUnchanged": true,
+    "claimedAndClaimableUnchangedForAllBeneficiaries": true,
+    "mintedNfts": 6,
+    "treasuryNfts": 0
+  },
+  "replayRejected": true,
+  "transfer": {
+    "tokenId": "campaign:0:right:0",
+    "ownerBefore": "alice.sandbox",
+    "ownerAfter": "bob.sandbox",
+    "attachedYocto": "1",
+    "aliceHistoricalNear": "2.5",
+    "bobHistoricalNear": "0",
+    "aliceFromLaterDepositNear": "0",
+    "bobFromLaterDepositNear": "2.5"
+  },
+  "bobPayout": {
+    "claimable": "0",
+    "claimedNear": "2.5",
+    "walletNetIncreaseNear": "2.4994969204253477",
+    "callbackGas": "1741673005981",
+    "allReceiptsFinal": true
+  },
+  "alicePayout": {
+    "claimable": "0",
+    "claimedNear": "2.5",
+    "walletNetIncreaseNear": "2.4995028394563404",
+    "callbackGas": "1748228442774",
+    "allReceiptsFinal": true
+  },
+  "storage": {
+    "beforeBytes": 186721,
+    "afterBytes": 409777,
+    "totalGrowthBytes": 223056,
+    "codeGrowthBytes": 216392,
+    "stateGrowthBytes": 6664,
+    "byteCostYocto": "10000000000000000000",
+    "extraStakeNear": "2.23056",
+    "finalTotalStorageStakeNear": "4.09777"
+  },
+  "balanceRecommendation": {
+    "fixtureOnly": true,
+    "outstandingBeneficiaryLiabilitiesNear": "14",
+    "maximumTransactionGasBudgetNear": "0.04",
+    "calculatedPreMigrationFloorNear": "18.13777",
+    "recommendedTotalBalanceBeforeMigrationNear": "20",
+    "marginNear": "1 (plus rounding up)",
+    "existingContractBalanceBeforeMigrationNear": "63.9984828257065804",
+    "formula": "live outstanding revenue + post-upgrade storage stake + transaction gas budget + at least 1 NEAR headroom; round up"
+  },
+  "success": true,
+  "deploymentAssessment": "Synthetic equivalent-state rehearsal passed. Live deployment still requires exact deployed state/code backup, funding/gas calculation for that snapshot, review, and explicit authorization."
+}

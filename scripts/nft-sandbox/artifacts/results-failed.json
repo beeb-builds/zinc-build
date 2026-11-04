@@ -1,0 +1,12 @@
+{
+  "framework": "near-sandbox 0.3.4 + near-api-js 7.2.0",
+  "requestedNearcore": "2.14.0",
+  "localOnly": true,
+  "steps": [],
+  "transactions": {},
+  "success": false,
+  "failure": {
+    "message": "Binary doesn't respond, probably is corrupted. Try re-downloading",
+    "stack": "Error: Binary doesn't respond, probably is corrupted. Try re-downloading\n    at ensureBinWithVersion (file:///workspace/scripts/nft-sandbox/node_modules/near-sandbox/dist/esm/binaryExecution-Du201ijT.mjs:161:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async initConfigsWithVersion (file:///workspace/scripts/nft-sandbox/node_modules/near-sandbox/dist/esm/binaryExecution-Du201ijT.mjs:175:23)\n    at async Sandbox.initConfigsWithVersion (file:///workspace/scripts/nft-sandbox/node_modules/near-sandbox/dist/esm/index.mjs:338:3)\n    at async Sandbox.start (file:///workspace/scripts/nft-sandbox/node_modules/near-sandbox/dist/esm/index.mjs:283:18)\n    at async run (file:///workspace/scripts/nft-sandbox/rehearse.mjs:69:13)\n    at async file:///workspace/scripts/nft-sandbox/rehearse.mjs:271:3"
+  }
+}

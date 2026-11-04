@@ -1,0 +1,7 @@
+{
+  "name": "zinc-local-nft-rehearsal",
+  "private": true,
+  "type": "module",
+  "scripts": { "prepare:fixture": "node prepare-fixture.mjs", "rehearse": "node rehearse.mjs" },
+  "dependencies": { "near-api-js": "7.2.0", "near-sandbox": "0.3.4" }
+}

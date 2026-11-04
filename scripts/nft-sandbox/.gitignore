@@ -1,0 +1,4 @@
+/node_modules/
+/pre-nft-contract/target/
+/chain/
+/sandbox.log

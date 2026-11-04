@@ -1,0 +1,205 @@
+{
+  "campaigns": [
+    {
+      "id": 0,
+      "creator": "sandbox",
+      "name": "Sandbox Campaign 0",
+      "description": "Local upgrade rehearsal with real deposits and completed payout receipts.",
+      "start_timestamp_ms": 1793459047103,
+      "end_timestamp_ms": 1793545507103,
+      "contributors": [
+        {
+          "role": "Artist",
+          "account_id": "alice.sandbox",
+          "share_bps": 2500
+        },
+        {
+          "role": "Developer",
+          "account_id": "developer.sandbox",
+          "share_bps": 2000
+        },
+        {
+          "role": "Promoter",
+          "account_id": "promoter.sandbox",
+          "share_bps": 1500
+        }
+      ],
+      "treasury_account": "treasury.sandbox",
+      "treasury_share_bps": 4000,
+      "created_at_ms": 1793459109392,
+      "total_deposited_yocto": "10000000000000000000000000"
+    },
+    {
+      "id": 1,
+      "creator": "sandbox",
+      "name": "Sandbox Campaign 1",
+      "description": "Local upgrade rehearsal with real deposits and completed payout receipts.",
+      "start_timestamp_ms": 1793459047103,
+      "end_timestamp_ms": 1793545507103,
+      "contributors": [
+        {
+          "role": "Artist",
+          "account_id": "alice.sandbox",
+          "share_bps": 2500
+        },
+        {
+          "role": "Developer",
+          "account_id": "developer.sandbox",
+          "share_bps": 2000
+        },
+        {
+          "role": "Promoter",
+          "account_id": "promoter.sandbox",
+          "share_bps": 1500
+        }
+      ],
+      "treasury_account": "treasury.sandbox",
+      "treasury_share_bps": 4000,
+      "created_at_ms": 1793459110909,
+      "total_deposited_yocto": "8000000000000000000000000"
+    }
+  ],
+  "balances": [
+    {
+      "campaignId": 0,
+      "accountId": "alice.sandbox",
+      "claimable": "2500000000000000000000000",
+      "claimed": "0"
+    },
+    {
+      "campaignId": 0,
+      "accountId": "bob.sandbox",
+      "claimable": "0",
+      "claimed": "0"
+    },
+    {
+      "campaignId": 0,
+      "accountId": "developer.sandbox",
+      "claimable": "2000000000000000000000000",
+      "claimed": "0"
+    },
+    {
+      "campaignId": 0,
+      "accountId": "promoter.sandbox",
+      "claimable": "1500000000000000000000000",
+      "claimed": "0"
+    },
+    {
+      "campaignId": 0,
+      "accountId": "treasury.sandbox",
+      "claimable": "0",
+      "claimed": "4000000000000000000000000"
+    },
+    {
+      "campaignId": 1,
+      "accountId": "alice.sandbox",
+      "claimable": "2000000000000000000000000",
+      "claimed": "0"
+    },
+    {
+      "campaignId": 1,
+      "accountId": "bob.sandbox",
+      "claimable": "0",
+      "claimed": "0"
+    },
+    {
+      "campaignId": 1,
+      "accountId": "developer.sandbox",
+      "claimable": "1600000000000000000000000",
+      "claimed": "0"
+    },
+    {
+      "campaignId": 1,
+      "accountId": "promoter.sandbox",
+      "claimable": "1200000000000000000000000",
+      "claimed": "0"
+    },
+    {
+      "campaignId": 1,
+      "accountId": "treasury.sandbox",
+      "claimable": "3200000000000000000000000",
+      "claimed": "0"
+    }
+  ],
+  "state": {
+    "amount": "63998482825706580400000000",
+    "block_hash": "2xKz8xTB5bs9cVS2uX6mw68P6WF3o6ocjPTCPg8uPhL1",
+    "block_height": 82,
+    "code_hash": "6sSYmsP7mi2zk24V1FqGXVohiejzN9GchJMhdEdW6P83",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 186721
+  },
+  "financialState": {
+    "campaigns": [
+      {
+        "id": "0",
+        "creator": "sandbox",
+        "name": "Sandbox Campaign 0",
+        "description": "Local upgrade rehearsal with real deposits and completed payout receipts.",
+        "start": "1793459047103",
+        "end": "1793545507103",
+        "contributors": [
+          {
+            "role": "Artist",
+            "accountId": "alice.sandbox",
+            "bps": 2500
+          },
+          {
+            "role": "Developer",
+            "accountId": "developer.sandbox",
+            "bps": 2000
+          },
+          {
+            "role": "Promoter",
+            "accountId": "promoter.sandbox",
+            "bps": 1500
+          }
+        ],
+        "treasury": "treasury.sandbox",
+        "treasuryBps": 4000,
+        "createdAt": "1793459109392",
+        "deposited": "10000000000000000000000000"
+      },
+      {
+        "id": "1",
+        "creator": "sandbox",
+        "name": "Sandbox Campaign 1",
+        "description": "Local upgrade rehearsal with real deposits and completed payout receipts.",
+        "start": "1793459047103",
+        "end": "1793545507103",
+        "contributors": [
+          {
+            "role": "Artist",
+            "accountId": "alice.sandbox",
+            "bps": 2500
+          },
+          {
+            "role": "Developer",
+            "accountId": "developer.sandbox",
+            "bps": 2000
+          },
+          {
+            "role": "Promoter",
+            "accountId": "promoter.sandbox",
+            "bps": 1500
+          }
+        ],
+        "treasury": "treasury.sandbox",
+        "treasuryBps": 4000,
+        "createdAt": "1793459110909",
+        "deposited": "8000000000000000000000000"
+      }
+    ],
+    "ledger": [
+      {
+        "campaignId": "0",
+        "accountId": "treasury.sandbox",
+        "claimed": "4000000000000000000000000",
+        "pending": "0"
+      }
+    ],
+    "bytesConsumed": 634
+  },
+  "rawStateBase64": "AgAAAAAAAAAAAAAABwAAAHNhbmRib3gSAAAAU2FuZGJveCBDYW1wYWlnbiAwSQAAAExvY2FsIHVwZ3JhZGUgcmVoZWFyc2FsIHdpdGggcmVhbCBkZXBvc2l0cyBhbmQgY29tcGxldGVkIHBheW91dCByZWNlaXB0cy6/Sn2SoQEAAB+RpJehAQAAAwAAAAYAAABBcnRpc3QNAAAAYWxpY2Uuc2FuZGJveMQJCQAAAERldmVsb3BlchEAAABkZXZlbG9wZXIuc2FuZGJveNAHCAAAAFByb21vdGVyEAAAAHByb21vdGVyLnNhbmRib3jcBRAAAAB0cmVhc3VyeS5zYW5kYm94oA8QPn6SoQEAAAAAAEpIARQWlUUIAAAAAAABAAAAAAAAAAcAAABzYW5kYm94EgAAAFNhbmRib3ggQ2FtcGFpZ24gMUkAAABMb2NhbCB1cGdyYWRlIHJlaGVhcnNhbCB3aXRoIHJlYWwgZGVwb3NpdHMgYW5kIGNvbXBsZXRlZCBwYXlvdXQgcmVjZWlwdHMuv0p9kqEBAAAfkaSXoQEAAAMAAAAGAAAAQXJ0aXN0DQAAAGFsaWNlLnNhbmRib3jECQkAAABEZXZlbG9wZXIRAAAAZGV2ZWxvcGVyLnNhbmRib3jQBwgAAABQcm9tb3RlchAAAABwcm9tb3Rlci5zYW5kYm943AUQAAAAdHJlYXN1cnkuc2FuZGJveKAP/UN+kqEBAAAAAAAIbWd23hCeBgAAAAAAAQAAAAAAAAAAAAAAEAAAAHRyZWFzdXJ5LnNhbmRib3gAAACEtjM7bwhPAwAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+}

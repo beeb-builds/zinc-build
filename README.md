@@ -1,0 +1,230 @@
+# Zinc
+
+**Transferable rights to future project revenue on NEAR.**
+
+Zinc lets teams create campaign revenue splits, mint a revenue-right NFT for each
+contributor, receive native NEAR deposits and claim earnings. Transferring a right
+moves future revenue to its new owner. Previously earned revenue stays claimable
+by the former owner.
+
+This is a NEAR Testnet prototype. Earnings come from actual deposits; creating or
+holding a right does not guarantee revenue.
+
+Repository: [beeb-builds/zinc-build](https://github.com/beeb-builds/zinc-build).
+The latest [QA report](docs/QA_BATCH_9.md) records a passing clean working-tree
+install/build/lint, 24 regressions, 45 responsive browser checks and NFT motion /
+reduced-motion checks. This is local verification; hosted acceptance is pending.
+Railway deployment is currently paused at the owner's request after the account
+trial expired. Deployment configuration is included; no hosted URL is claimed.
+
+## Run locally
+
+Requirements: Node.js **22.13+** with native **node:sqlite**, npm and a browser.
+Public campaign/NFT details work without connecting. Transactions need a Testnet
+wallet with testnet NEAR for deposits and gas.
+
+~~~powershell
+npm ci
+npm run build
+npm run start
+~~~
+
+Open <http://localhost:3000>. Default setup requires no environment file or
+server-side wallet key. Configuration is in [src/lib/near.ts](src/lib/near.ts):
+
+| Setting | Value |
+| --- | --- |
+| Network | NEAR Testnet |
+| Contract | zinc-builder-2026.testnet |
+| Application RPC | https://test.rpc.fastnear.com |
+| Explorer | [Contract on NEAR Blocks](https://testnet.nearblocks.io/address/zinc-builder-2026.testnet) |
+
+Use **npm run dev** for development. Stop the production server before rebuilding
+its .next directory, then restart after the build. Replacing assets underneath a
+running older server can cause missing CSS/JavaScript. Starting the app does not
+deploy a contract or run a migration.
+
+## Judge walkthrough: do X, see Y
+
+[The demo guide](docs/JUDGE_DEMO.md) contains a public tour, a fresh two-wallet
+scenario and exact expected amounts.
+
+| Do this | See this |
+| --- | --- |
+| Open / | Live totals and deposits by campaign; disconnected wallet earnings state. |
+| Open /campaigns | On-chain campaigns, status, dates and deposited totals. |
+| Open /campaigns/7 | Acceptance campaign, 60% Artist right, 40% treasury, original contributor versus current owner. |
+| Open /rights/campaign%3A7%3Aright%3A0 | Actual NFT, current owner and available ownership history. |
+| Connect a Testnet wallet; open /nfts | Current and known transferred rights; an unrelated wallet may own none. |
+| Open /earnings connected | Campaign/account claimed and claimable amounts, including historical earnings. |
+| Open /transactions | Verified app-recorded activity and explicit indexing limitations. |
+| Open /workspace/7 | Eligibility preview; private access requires a signed message and server authorization. |
+
+Settings shows the actual network/RPC/wallet configuration. The /pay/{id} page
+accepts campaign support. Charts use real campaign totals, not invented history.
+
+## What the NFT controls
+
+Every contributor slot has an immutable campaign, role and basis-point share.
+One NFT is minted per slot, with ID **campaign:{campaign_id}:right:{index}**,
+where index is zero-based. Treasury is account-based and receives no NFT unless
+its account is separately listed as a contributor.
+
+Original contributor accounts stay in campaign history. Current NFT ownership
+controls that right's future revenue. Campaign dates limit new deposits, not
+already-earned claims.
+
+Example: A owns the 60% right; B is the 40% treasury:
+
+| Action | A claimable (NEAR) | B claimable (NEAR) |
+| --- | ---: | ---: |
+| Deposit 0.01 | 0.006 | 0.004 |
+| A transfers NFT to B | 0.006 | 0.004 |
+| Deposit another 0.01 | 0.006 | 0.014 |
+| Both claims complete | 0 | 0 |
+
+B's 0.014 is 0.008 treasury plus 0.006 post-transfer NFT earnings. A keeps its
+original 0.006.
+
+## Architecture and exact accounting
+
+~~~mermaid
+flowchart LR
+  App[Next.js and Wallet Selector] -->|signed calls / public views| Zinc[Zinc NEAR contract]
+  Zinc -->|reserved claim and Promise payout| Account[Claimant]
+  App -->|signed challenge / activity hash| Server[Node server]
+  Server -->|finalized verification| Zinc
+  Server --> DB[(SQLite)]
+~~~
+
+- Contract: Rust, official **near-sdk** and **near-contract-standards**, pinned
+  to **5.30.0**. Source: [contracts/zinc-contract](contracts/zinc-contract).
+- App: Next.js **16.4.3**, React, TypeScript, Tailwind, near-api-js and multi-wallet
+  Wallet Selector v10. Users sign through their wallets.
+- Deposits stay in Zinc's central contract until claimed. There are no per-token
+  subaccounts or wallet keys transferred with an NFT.
+- Before ownership changes, the contract credits the outgoing owner's interval
+  and checkpoints that right's deposited total. Later deposits accrue from the
+  checkpoint to the new owner.
+- Checked integer accounting uses basis points (25% = 2500 bps). Fractional
+  yoctoNEAR remainders stay with the earning account. Aggregate entitlement is
+  floored to whole yoctoNEAR for claims. Frontend amounts use decimal strings and
+  BigInt: **1 NEAR = 10^24 yoctoNEAR**.
+- Claim accounting is reserved before the external Promise transfer. The private
+  callback completes the reservation or restores the original claimant on
+  failure. A wallet signature alone does not prove payout success.
+
+See [the accounting design](docs/MILESTONE_5_NFT_ACCOUNTING.md). Its original
+deployment-status notes are historical; later live evidence is recorded below.
+
+## Transfer security and holder access
+
+| Risk | Implemented boundary |
+| --- | --- |
+| Seller takes later deposits | Ownership checkpoint settles the seller's interval before transfer. |
+| Buyer takes historical revenue | Historical credits remain in the former owner's campaign/account ledger. |
+| Duplicate claim or transfer during payout | Claimed/pending reservations precede payout; callback stays with the original claimant. |
+| Non-owner transfers a token | Contract NFT authorization is authoritative; UI also checks fresh ownership. Standard transfer attaches exactly one yoctoNEAR. |
+| Former holder reuses workspace session | Server rechecks the session's registered full-access key and finalized ownership on every protected request. |
+
+The workspace uses NEP-413 challenges, expiring server sessions and HttpOnly
+cookies. Current holders may read; the immutable creator has separate editorial
+read/publish access. Original contribution or treasury status alone grants no
+holder access. Revocation cannot erase material already copied.
+See [the workspace threat model](docs/holder-workspace.md).
+
+This prototype has no independent security audit. Contract upgrade authority
+and the application host remain trust boundaries. State growth needs storage
+reserve and gas headroom; callback failure can leave a pending operation requiring
+investigation.
+
+## Server storage and hosting
+
+| Optional variable | Default |
+| --- | --- |
+| ZINC_WORKSPACE_DB | data/zinc-workspace.sqlite |
+| ZINC_ACTIVITY_DB | data/zinc-activity.sqlite |
+
+Use writable persistent disk and appropriate database/WAL backups. The data
+directory is gitignored; a fresh checkout has empty app databases. On-chain state
+is unaffected. Native SQLite may emit an experimental-runtime warning.
+
+Independent ephemeral/serverless instances do not share these files. Use a
+durable shared database design before hosting that way. Use HTTPS publicly;
+session cookies are Secure on HTTPS. Briefs are plaintext on the host and should
+contain no secrets or wallet recovery material.
+
+## Verification and evidence
+
+On **November 3, 2026**, campaign #7 completed the two-wallet scenario: A retained
+and claimed **0.006 NEAR** after transfer; B claimed **0.014 NEAR**. Both claims
+reached FINAL with successful payout callbacks, both claimable values became
+zero, and B owned the NFT at finalized block **276052836**. A's saved workspace
+session was denied after transfer. See [the acceptance report](docs/TWO_WALLET_ACCEPTANCE.md)
+for public hashes and block evidence.
+
+**Later change:** the user subsequently signed a return transfer. At finalized
+block **276057974**, A owned the NFT again. Claimed amounts stayed A 0.006 / B
+0.014, both claimable zero, deposits 0.02. The earlier run describes historical
+observations; do not present its B ownership as today's guaranteed state.
+After a further user-confirmed transfer, block **276058888** showed B owning it
+again, with those same claimed/deposit totals and zero claimable for both.
+Always inspect the live owner rather than assuming a recorded snapshot persists.
+
+Latest frontend verification: **23 regression scripts**, lint and production
+build passed. These fixtures cover exact amounts, wallet lifecycle, recovery,
+ownership refresh, authorization and RPC failures. They do not certify every
+wallet/browser combination. From the repo root:
+
+~~~powershell
+npm run lint
+Get-ChildItem scripts -Filter 'check-*.cjs' | Sort-Object Name | ForEach-Object {
+  node $_.FullName
+  if ($LASTEXITCODE -ne 0) { throw "Failed: $($_.Name)" }
+}
+npm run build
+~~~
+
+Contract checks require Rust and cargo-near:
+
+~~~powershell
+Set-Location contracts/zinc-contract
+cargo test
+cargo near check
+cargo near build non-reproducible-wasm --no-abi
+~~~
+
+[The sandbox rehearsal](scripts/nft-sandbox/README.md) requires a running Docker
+engine. It uses a reconstructed pre-NFT fixture, not an exact downloaded
+production backup. Contract/sandbox checks were not rerun for this documentation
+update. Do not run migration initializers as part of a live demo.
+
+## Scope and limits
+
+- Native NEAR support is an explicit campaign deposit. External project income
+  is not automatically collected; off-chain agreements are not enforced.
+- There is no marketplace or sale settlement. Direct transfer is not evidence
+  of a sale during a payout.
+- Activity is a verified partial record, not a full chain index. Older
+  transactions need hash/signer import while RPC evidence remains available.
+  Claims are campaign/account payouts, not individual NFT payouts.
+  See [shared activity](docs/shared-activity.md).
+- Workspace signing supports direct NEP-413 responses; redirect recovery is
+  limited. Broader rejection/offline, physical-device and hosting QA remains on
+  [the readiness checklist](docs/HACKATHON_READINESS.md).
+- Local generated snapshots/receipts under data are gitignored. Public hashes
+  in the acceptance report remain reviewable.
+
+## Track and development provenance
+
+Target track: **NFTs That Do Something (nfts)**. Zinc demonstrates revenue and
+access controlled by ownership. The [official rules](https://nearhackathon.com/HACKATHON.md),
+checked November 3, 2026 (Q-011 and Tracks), make integrations optional and
+starter prompts examples. NFT-controlled subaccounts are not implemented here.
+Recheck live rules before submission.
+
+The app started from create-next-app, uses the dependencies in package.json /
+Cargo.toml, and was developed with Codex assistance. Before public submission,
+document actual baseline/submission refs and dates for earlier work, review
+files/history for secrets, and select/add a license. These release/provenance
+checks have not been certified by this README.

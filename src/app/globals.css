@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+:root {
+  --zinc-bg: #07142d;
+  --zinc-panel: #10213d;
+  --zinc-panel-deep: #0b1b34;
+  --zinc-border: rgba(255, 255, 255, 0.06);
+  --zinc-coral: #ff6d5f;
+  --zinc-pink: #ff8da1;
+  --zinc-text: #ffffff;
+  --zinc-muted: #7f91aa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--zinc-bg);
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 65% -10%,
+      rgba(255, 109, 95, 0.07),
+      transparent 30%
+    ),
+    var(--zinc-bg);
+  color: var(--zinc-text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Base resets must not override utility font sizes on compact controls. */
+@layer base {
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Keep mobile actions usable without letting long wallet labels widen the page. */
+@media (max-width: 639px) {
+  .zinc-header-actions > button {
+    min-height: 44px;
+    justify-content: center;
+    flex: 1 1 auto;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}
+
+.zinc-page-enter { animation: zinc-page-enter 280ms ease-out both; }
+@keyframes zinc-page-enter {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SVG motion stays in CSS: no timers, extra RPC requests or React rerenders. */
+.zinc-right-orbits {
+  transform-origin: 0 0;
+  animation: zinc-orbit-turn 48s linear infinite;
+}
+.zinc-right-electron {
+  offset-path: path("M 76 0 A 76 30 0 1 1 -76 0 A 76 30 0 1 1 76 0");
+  offset-rotate: 0deg;
+  animation: zinc-electron-travel 7s linear infinite;
+}
+@keyframes zinc-orbit-turn { to { transform: rotate(360deg); } }
+@keyframes zinc-electron-travel { to { offset-distance: 100%; } }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .zinc-right-card:hover { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zinc-page-enter, .zinc-right-orbits, .zinc-right-electron { animation: none; }
+}
+
+::selection {
+  background: rgba(255, 109, 95, 0.35);
+  color: white;
+}
+
+/* Show slow navigation without flicker or changing link dimensions. */
+.zinc-nav-pending {
+  opacity: 0;
+  animation: zinc-nav-reveal 150ms ease 150ms forwards;
+}
+
+@keyframes zinc-nav-reveal {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zinc-nav-pending {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07142d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #213754;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a4366;
+}

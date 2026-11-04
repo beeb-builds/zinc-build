@@ -1,0 +1,207 @@
+{
+  "final_execution_status": "FINAL",
+  "receipts_outcome": [
+    {
+      "block_hash": "CBE9vCBJaE5enC9jr5BMQCDnP2EyhctmFJurjxyxm6rL",
+      "id": "C6eoLZ7p2d9ytazbyP2WwVzdAbVDFgNGrtyeMNhmjcQk",
+      "outcome": {
+        "executor_id": "zinc.sandbox",
+        "gas_burnt": 1437824800641,
+        "logs": [],
+        "metadata": {
+          "contracts": [
+            {
+              "local": "62GTnrKwSXNEV35gfgoCczwDx8te5RWJPqsB5F5BoNNY"
+            }
+          ],
+          "gas_profile": [
+            {
+              "cost": "BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "2382912999"
+            },
+            {
+              "cost": "CONTRACT_LOADING_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "35445963"
+            },
+            {
+              "cost": "CONTRACT_LOADING_BYTES",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "438171092340"
+            },
+            {
+              "cost": "READ_MEMORY_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "5219726400"
+            },
+            {
+              "cost": "READ_MEMORY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "357325302"
+            },
+            {
+              "cost": "READ_REGISTER_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "5034330372"
+            },
+            {
+              "cost": "READ_REGISTER_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "2365488"
+            },
+            {
+              "cost": "STORAGE_HAS_KEY_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "54039896625"
+            },
+            {
+              "cost": "STORAGE_HAS_KEY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "831352815"
+            },
+            {
+              "cost": "UTF8_DECODING_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "3111779061"
+            },
+            {
+              "cost": "UTF8_DECODING_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "19535892093"
+            },
+            {
+              "cost": "WASM_INSTRUCTION",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "6669260136"
+            },
+            {
+              "cost": "WRITE_MEMORY_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "8411384583"
+            },
+            {
+              "cost": "WRITE_MEMORY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "108950880"
+            },
+            {
+              "cost": "WRITE_REGISTER_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "5731044972"
+            },
+            {
+              "cost": "WRITE_REGISTER_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "91237536"
+            }
+          ],
+          "version": 4
+        },
+        "receipt_ids": [
+          "FeanGg4Jf2xne9M3sQy99v8rhz4ceYYYvJvR4gTW55Ed"
+        ],
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: panicked at src\\nft.rs:71:9:\nNFT schema migration already completed"
+                }
+              }
+            }
+          }
+        },
+        "tokens_burnt": "143782480064100000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "3PcVeJgxFiF6rMEs9zrPx7EvqSkHxPkQ7odCqRoyvDyp"
+        }
+      ]
+    },
+    {
+      "block_hash": "BAamybpiKxmpEDJj7E6rPdJ7uqzjCNH5zNsoRuSjaXsr",
+      "id": "FeanGg4Jf2xne9M3sQy99v8rhz4ceYYYvJvR4gTW55Ed",
+      "outcome": {
+        "executor_id": "zinc.sandbox",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "contracts": [
+            {
+              "local": "62GTnrKwSXNEV35gfgoCczwDx8te5RWJPqsB5F5BoNNY"
+            }
+          ],
+          "gas_profile": [],
+          "version": 4
+        },
+        "receipt_ids": [],
+        "status": {
+          "SuccessValue": ""
+        },
+        "tokens_burnt": "0"
+      },
+      "proof": []
+    }
+  ],
+  "status": {
+    "Failure": {
+      "ActionError": {
+        "index": 0,
+        "kind": {
+          "FunctionCallError": {
+            "ExecutionError": "Smart contract panicked: panicked at src\\nft.rs:71:9:\nNFT schema migration already completed"
+          }
+        }
+      }
+    }
+  },
+  "transaction": {
+    "actions": [
+      {
+        "FunctionCall": {
+          "args": "e30=",
+          "deposit": "0",
+          "gas": 300000000000000,
+          "method_name": "migrate_nfts"
+        }
+      }
+    ],
+    "hash": "bmpYmHgjtb3H4S6XBohKRQFo1w6QQ8rT3ceRoYt7We4",
+    "nonce": 41000003,
+    "priority_fee": 0,
+    "public_key": "ed25519:HakBjdXMrQGPENSewMWsfUU8xJTLFeQ6huvtr8o2mr6i",
+    "receiver_id": "zinc.sandbox",
+    "signature": "ed25519:3cfymT5nKZKqKkxrfjE5czuAUSn5urKEMYCp6xK76cUprotW8MLka4SrmdujoNfmusQZZhhcT9yidh7NRBPDyCff",
+    "signer_id": "zinc.sandbox"
+  },
+  "transaction_outcome": {
+    "block_hash": "CBE9vCBJaE5enC9jr5BMQCDnP2EyhctmFJurjxyxm6rL",
+    "id": "bmpYmHgjtb3H4S6XBohKRQFo1w6QQ8rT3ceRoYt7We4",
+    "outcome": {
+      "executor_id": "zinc.sandbox",
+      "gas_burnt": 308090803076,
+      "logs": [],
+      "metadata": {
+        "gas_profile": null,
+        "version": 1
+      },
+      "receipt_ids": [
+        "C6eoLZ7p2d9ytazbyP2WwVzdAbVDFgNGrtyeMNhmjcQk"
+      ],
+      "status": {
+        "SuccessReceiptId": "C6eoLZ7p2d9ytazbyP2WwVzdAbVDFgNGrtyeMNhmjcQk"
+      },
+      "tokens_burnt": "30809080307600000000"
+    },
+    "proof": [
+      {
+        "direction": "Right",
+        "hash": "6RDm27bwuMpqhjuBZTxfE4jR2RLqnJCxpCBmgPbDMQd3"
+      }
+    ]
+  }
+}
