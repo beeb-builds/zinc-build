@@ -17,6 +17,7 @@ const shell = load("src/components/layout/DashboardShell.tsx", {
   "next/link": link, "next/navigation": { usePathname: () => pathname }, "./NavigationPending": hint,
   "../wallet/WalletProvider": { useWallet: () => ({ accountId: null, connect() {}, disconnect() {} }) },
   "../transactions/TransactionRecovery": { __esModule: true, default: () => null },
+  "./ScrollMotion": load("src/components/layout/ScrollMotion.tsx"),
 });
 const renderShell = () => renderToStaticMarkup(React.createElement(shell.default, { title: "Overview", subtitle: "Revenue rights" }, React.createElement("p", null, "Current page content")));
 let html = renderShell();

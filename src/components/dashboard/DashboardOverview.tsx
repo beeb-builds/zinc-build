@@ -32,6 +32,7 @@ import { useReadRefresh } from "../data/useReadRefresh";
 import { useWallet } from "../wallet/WalletProvider";
 import { getCampaigns, getClaimable, getNftTotalSupply, type OnChainCampaign } from "../../lib/zinc-contract";
 import DashboardActions from "./DashboardActions";
+import WalletDashboard from "./WalletDashboard";
 import { summarizeDashboardClaims, type DashboardClaim } from "../../lib/dashboard-claims";
 import { campaignStatus, validateDiscoveryCampaigns } from "../../lib/campaign-discovery";
 
@@ -68,7 +69,7 @@ function MetricCard({
   trend,
 }: MetricCardProps) {
   return (
-    <div className="min-w-0 rounded-[26px] border border-white/[0.06] bg-[#10213d] p-4 sm:p-5 shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
+    <div data-zinc-reveal className="zinc-interactive-surface min-w-0 rounded-[26px] border border-white/[0.06] bg-[#10213d] p-4 sm:p-5 shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
       <div className="mb-6 flex items-start justify-between">
         <div className="min-w-0">
           <p className="text-sm font-medium text-[#8fa0bc]">
@@ -178,8 +179,6 @@ export default function DashboardOverview() {
   const revenueLabel = totalRevenue === null ? campaignError ? "Unavailable" : "Loading…" : `${yoctoToNear(totalRevenue)} NEAR`;
   const claimsFailed = Boolean(accountId && claimError?.accountId === accountId && claimError.campaigns === campaigns);
   const currentClaims = accountId && claimable?.accountId === accountId && claimable.campaigns === campaigns ? claimable : null;
-  const claimableLabel = !accountId ? "Connect wallet" : campaignError || claimsFailed ? "Unavailable"
-    : claimable?.accountId === accountId && claimable.campaigns === campaigns ? `${yoctoToNear(claimable.amount)} NEAR` : "Loading…";
   const allocationData = useMemo(() => selectedCampaign ? [
     ...selectedCampaign.contributors.map((contributor, index) => ({ id: `contributor-${index}`, name: contributor.role, value: contributor.share_bps, color: allocationColors[index % allocationColors.length] })),
     { id: "treasury", name: "Project Treasury", value: selectedCampaign.treasury_share_bps, color: "#8fa0bc" },
@@ -193,7 +192,7 @@ export default function DashboardOverview() {
   return (
     <DashboardShell
       title="Campaign Overview"
-      subtitle="Monitor campaign revenue, rights NFTs and contributor payouts."
+      subtitle="Your wallet’s earnings, alongside live activity across the Zinc platform."
       headerActions={
         <button
           type="button"
@@ -233,11 +232,14 @@ export default function DashboardOverview() {
             </p>
           )}
 
+          <WalletDashboard accountId={accountId} campaigns={campaigns} campaignError={campaignError} onConnect={connect} />
+
           <DashboardActions accountId={accountId} claims={currentClaims?.ready ?? null} claimsFailed={claimsFailed}
             campaignFailed={campaignError} campaignsReady={campaigns !== null && now !== null}
             activeCampaign={activeCampaigns[0] ?? null} onConnect={connect} />
 
-          <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mb-4 mt-8"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ff9988]">Across all Zinc</p><h3 className="mt-2 text-xl font-semibold">Platform overview</h3><p className="mt-2 text-sm leading-6 text-[#8fa0bc]">These shared on-chain totals and public campaigns are the same for every wallet. Your personal balances are shown above.</p></div>
+          <section aria-label="Platform totals" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <MetricCard
               title="Total campaign revenue"
               value={revenueLabel}
@@ -253,9 +255,9 @@ export default function DashboardOverview() {
             />
 
             <MetricCard
-              title="Claimable earnings"
-              value={claimableLabel}
-              helper={accountId ? "Available across campaigns for your connected wallet" : "Connect your wallet to view your earnings"}
+              title="Total campaigns"
+              value={campaignError ? "Unavailable" : campaigns ? String(campaigns.length) : "Loading…"}
+              helper="All campaigns created on Zinc"
               icon={TrendingUp}
             />
 
@@ -464,7 +466,7 @@ export default function DashboardOverview() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-[#8fa0bc]">
-                    Recent campaigns
+                    Recent public campaigns
                   </p>
 
                   <h3 className="mt-1 text-lg font-semibold">

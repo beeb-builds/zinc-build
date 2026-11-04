@@ -16,6 +16,7 @@ import {
 import { useWallet } from "../wallet/WalletProvider";
 import TransactionRecovery from "../transactions/TransactionRecovery";
 import NavigationPending from "./NavigationPending";
+import ScrollMotion from "./ScrollMotion";
 
 type DashboardShellProps = {
   children: ReactNode;
@@ -103,6 +104,7 @@ export default function DashboardShell({
 
   return (
     <div className="min-h-screen bg-[#07142d] text-white">
+      <div aria-hidden="true" className="zinc-scroll-progress" />
       <a href="#zinc-content" className="fixed left-4 top-3 z-[100] -translate-y-24 rounded-xl bg-[#ff8a9c] px-4 py-3 text-sm font-semibold text-[#07142d] focus:translate-y-0">Skip to page content</a>
       <aside className="fixed inset-y-0 left-0 z-50 hidden w-[76px] flex-col items-center border-r border-white/[0.06] bg-[#08172f] py-5 md:flex">
         <Link
@@ -228,6 +230,7 @@ export default function DashboardShell({
         </nav>
 
         <main id="zinc-content" tabIndex={-1} className="zinc-page-enter mx-auto min-w-0 max-w-[1600px] scroll-mt-4 px-4 py-5 outline-none sm:px-5 md:px-8 md:py-7 xl:px-10">
+          <ScrollMotion route={pathname} />
           {disconnectError && <p role="alert" className="mb-4 text-sm text-[#FF8E9C]">Could not disconnect your wallet. Please try again.</p>}
           <TransactionRecovery />
           {children}

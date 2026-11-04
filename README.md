@@ -66,7 +66,7 @@ scenario and exact expected amounts.
 
 | Do this | See this |
 | --- | --- |
-| Open / | Live totals and deposits by campaign; disconnected wallet earnings state. |
+| Open / | Your connected wallet's balances, NFTs and related campaigns, followed by clearly labeled platform totals and public campaigns. |
 | Open /campaigns | On-chain campaigns, status, dates and deposited totals. |
 | Open /campaigns/7 | Acceptance campaign, 60% Artist right, 40% treasury, original contributor versus current owner. |
 | Open /rights/campaign%3A7%3Aright%3A0 | Actual NFT, current owner and available ownership history. |
