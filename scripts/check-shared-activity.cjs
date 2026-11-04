@@ -1,6 +1,8 @@
 // Receipt fixtures and real SQLite. Does not submit any NEAR transactions.
 const fs = require("node:fs"), ts = require("typescript"), vm = require("node:vm"), assert = require("node:assert/strict");
 const compile = (file) => ts.transpileModule(fs.readFileSync(file, "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+const appOrigin = {}, originEnv = {};
+vm.runInNewContext(compile("src/lib/server/app-origin.ts"), { exports: appOrigin, URL, process: { env: originEnv }, require: () => ({}) });
 const near = { NEAR_NETWORK_ID: "testnet", ZINC_CONTRACT_ID: "zinc.testnet", NEAR_RPC_URL: "https://rpc.example" };
 const verify = {}, verifier = {}, store = {};
 vm.runInNewContext(compile("src/lib/verify-transaction.ts"), { exports: verify, atob, require: () => near });
@@ -68,7 +70,7 @@ vm.runInNewContext(compile("src/lib/server/activity-verifier.ts"), { exports: ve
   assert.notEqual(rows[1].id, rows[2].id);
   const next = require("next/server"), routes = {};
   vm.runInNewContext(compile("src/app/api/activity/route.ts"), { exports: routes, Buffer, Response,
-    require: (id) => id.endsWith("activity-store") ? store : id.endsWith("activity-verifier") ? verifier : require(id) });
+    require: (id) => id.endsWith("app-origin") ? appOrigin : id.endsWith("activity-store") ? store : id.endsWith("activity-verifier") ? verifier : require(id) });
   const request = (input, origin = "https://zinc.example") => new next.NextRequest("https://zinc.example/api/activity", { method: "POST", headers: { origin }, body: JSON.stringify(input) });
   assert.equal((await routes.POST(request({ hash, signer }, "https://evil.example"))).status, 403);
   assert.equal((await routes.POST(request({ hash: "invalid", signer }))).status, 400);
@@ -94,5 +96,9 @@ vm.runInNewContext(compile("src/lib/server/activity-verifier.ts"), { exports: ve
   assert.equal(activity.readRecordedActivity()[0].amountYocto, "1", "Server outage must retain the local confirmation");
   for (let i = 0; i < 30; i++) assert.ok(store.takeActivityBudget());
   assert.equal(store.takeActivityBudget(), false);
+  originEnv.ZINC_PUBLIC_ORIGIN = "https://zinc.example";
+  const proxyRequest = (origin) => new next.NextRequest("http://localhost:8080/api/activity", { method: "POST", headers: { origin }, body: JSON.stringify({hash, signer}) });
+  assert.equal((await routes.POST(proxyRequest("https://zinc.example"))).status, 200);
+  assert.equal((await routes.POST(proxyRequest("https://evil.example"))).status, 403);
   console.log("Shared activity checks passed: exact deposits, final receipts, payout callback/amount, trusted NFT events, SQLite dedup/filtering, origin/input limits, cached imports, RPC budget.");
 })().catch((error) => { console.error(error); process.exitCode = 1; });

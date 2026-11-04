@@ -13,9 +13,9 @@ holding a right does not guarantee revenue.
 Repository: [beeb-builds/zinc-build](https://github.com/beeb-builds/zinc-build).
 The latest [QA report](docs/QA_BATCH_9.md) records a passing clean working-tree
 install/build/lint, 24 regressions, 45 responsive browser checks and NFT motion /
-reduced-motion checks. This is local verification; hosted acceptance is pending.
-Railway deployment is currently paused at the owner's request after the account
-trial expired. Deployment configuration is included; no hosted URL is claimed.
+reduced-motion checks. Hosted wallet-signing acceptance remains a separate check.
+The Testnet app is hosted on Railway at
+[zinc-build-production.up.railway.app](https://zinc-build-production.up.railway.app).
 
 ## Run locally
 
@@ -144,6 +144,15 @@ investigation.
 | --- | --- |
 | ZINC_WORKSPACE_DB | data/zinc-workspace.sqlite |
 | ZINC_ACTIVITY_DB | data/zinc-activity.sqlite |
+| ZINC_PUBLIC_ORIGIN | Request URL origin (local development) |
+
+Behind an HTTPS reverse proxy, set `ZINC_PUBLIC_ORIGIN` to the exact public
+origin, for example `https://zinc-build-production.up.railway.app`. This binds
+workspace signatures, sessions, secure cookies and same-origin API checks to
+the public app rather than the internal container URL. It does not trust
+client-supplied forwarded headers. Update this setting if the public domain changes.
+The Railway service mounts a persistent volume at `/data`, with both database
+paths set to `/data/zinc-workspace.sqlite` and `/data/zinc-activity.sqlite`.
 
 Use writable persistent disk and appropriate database/WAL backups. The data
 directory is gitignored; a fresh checkout has empty app databases. On-chain state

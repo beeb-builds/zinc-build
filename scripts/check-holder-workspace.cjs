@@ -1,6 +1,8 @@
 // Real signatures and SQLite; mocked NEAR reads. No network transactions.
 const fs = require("fs"), ts = require("typescript"), vm = require("vm"), assert = require("node:assert/strict");
 const compile = (file) => ts.transpileModule(fs.readFileSync(file, "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+const appOrigin = {}, originEnv = {};
+vm.runInNewContext(compile("src/lib/server/app-origin.ts"), { exports: appOrigin, URL, process: { env: originEnv }, require: () => ({}) });
 (async () => {
   const near = await import("near-api-js"), nep413 = await import("near-api-js/nep413");
   const sqlite = require("node:sqlite");
@@ -60,7 +62,7 @@ const compile = (file) => ts.transpileModule(fs.readFileSync(file, "utf8"), { co
   failRpc = true; await assert.rejects(access.authorizeWorkspace(6, "bob.testnet"));
   failRpc = false; currentOwner = "alice.testnet";
   const next = require("next/server"), routes = {};
-  vm.runInNewContext(compile("src/app/api/workspace/[action]/route.ts"), { exports: routes, Buffer, URL, require: (id) => id === "next/server" ? next : id.endsWith("workspace-access") ? access : id.endsWith("workspace-store") ? store : require(id) });
+  vm.runInNewContext(compile("src/app/api/workspace/[action]/route.ts"), { exports: routes, Buffer, URL, require: (id) => id === "next/server" ? next : id.endsWith("app-origin") ? appOrigin : id.endsWith("workspace-access") ? access : id.endsWith("workspace-store") ? store : require(id) });
   async function call(action, input, cookie = "", requestOrigin = origin, method = "POST", extra = "") {
     const request = new next.NextRequest(`${origin}/api/workspace/${action}${extra}`, { method, headers: { origin: requestOrigin, cookie, "Content-Type": "application/json" }, ...(method === "POST" ? { body: JSON.stringify(input) } : {}) });
     return routes[method](request, { params: Promise.resolve({ action }) });
@@ -93,5 +95,12 @@ const compile = (file) => ts.transpileModule(fs.readFileSync(file, "utf8"), { co
   assert.equal((await call("resources", { campaignId: "6", accountId: "creator.testnet", title: "Big", body: "x".repeat(50000), revision: 2 }, creatorCookie)).status, 413);
   assert.equal((await call("logout", {}, creatorCookie)).status, 200);
   assert.equal(store.readSession(creatorToken, origin), undefined);
+  originEnv.ZINC_PUBLIC_ORIGIN = origin;
+  const proxyRequest = (site) => new next.NextRequest("http://localhost:8080/api/workspace/challenge", { method: "POST", headers: { origin: site, "Content-Type": "application/json" }, body: JSON.stringify({accountId:"proxy.testnet"}) });
+  const proxyResponse = await routes.POST(proxyRequest(origin), {params:Promise.resolve({action:"challenge"})});
+  assert.equal(proxyResponse.status, 200);
+  assert.ok(proxyResponse.cookies.get("zinc_workspace_challenge").secure);
+  assert.ok((await proxyResponse.json()).recipient.includes(origin));
+  assert.equal((await routes.POST(proxyRequest("https://evil.example"), {params:Promise.resolve({action:"challenge"})})).status,403);
   console.log("PASS: real NEP-413 signatures, origin/message tampering, single-use/expiring challenges, rate limit, expiring origin-bound sessions, SQLite revisions, revoked keys, finalized holder transfer revocation, creator publishing role, treasury exclusion, and RPC fail-closed behavior. No network transactions sent.");
 })().catch((error) => { console.error(error); process.exitCode = 1; });

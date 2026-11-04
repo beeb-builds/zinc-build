@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authorizeWorkspace, requireActiveKey, verifyWorkspaceSignature, workspaceRecipient } from "../../../../lib/server/workspace-access";
 import { consumeChallenge, createChallenge, createSession, deleteSession, readBrief, readSession, saveBrief, WorkspaceError } from "../../../../lib/server/workspace-store";
+import { appOrigin } from "../../../../lib/server/app-origin";
 
 const SESSION = "zinc_workspace_session", CHALLENGE = "zinc_workspace_challenge";
 type Context = { params: Promise<{ action: string }> };
 function json(data: unknown, status = 200) { return NextResponse.json(data, { status, headers: { "Cache-Control": "no-store, private", Vary: "Cookie" } }); }
-function cookieOptions(request: NextRequest, maxAge: number) { return { httpOnly: true, sameSite: "strict" as const, secure: new URL(request.url).protocol === "https:", path: "/api/workspace", maxAge }; }
-function origin(request: NextRequest) { return new URL(request.url).origin; }
+function cookieOptions(request: NextRequest, maxAge: number) { return { httpOnly: true, sameSite: "strict" as const, secure: new URL(origin(request)).protocol === "https:", path: "/api/workspace", maxAge }; }
+function origin(request: NextRequest) { return appOrigin(request); }
 function account(value: unknown): string {
   if (typeof value !== "string" || value.length < 2 || value.length > 64 || !/^[a-z0-9]+(?:[._-][a-z0-9]+)*$/.test(value)) throw new WorkspaceError(400, "A valid NEAR account is required.");
   return value;

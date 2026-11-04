@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
 import { readSharedActivity, hasActivityTransaction, saveActivityTransaction, takeActivityBudget } from "../../../lib/server/activity-store";
 import { ActivityError, validActivityInput, verifyActivityTransaction } from "../../../lib/server/activity-verifier";
+import { appOrigin } from "../../../lib/server/app-origin";
 
 const headers = { "Cache-Control": "no-store" };
 export async function GET(request: NextRequest) {
@@ -14,7 +15,7 @@ export async function GET(request: NextRequest) {
 }
 let active = 0;
 export async function POST(request: NextRequest) {
-  if (request.headers.get("origin") !== request.nextUrl.origin) return Response.json({ error: "Use the Zinc app to import a transaction." }, { status: 403, headers });
+  if (request.headers.get("origin") !== appOrigin(request)) return Response.json({ error: "Use the Zinc app to import a transaction." }, { status: 403, headers });
   let body: unknown;
   try {
     const reader = request.body?.getReader();
