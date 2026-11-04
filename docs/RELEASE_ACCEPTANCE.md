@@ -20,6 +20,17 @@ This is an evidence checkpoint, not a security audit or a guarantee of readiness
   approved reconnection and signed the hosted-domain workspace message. A then
   received **Current-holder access** to campaign #7. Recheck access succeeded
   without another signature; the creator has not published a brief yet.
+- After the user connected B, A's authenticated workspace view cleared. B's
+  eligibility preview showed creator/treasury status and zero owned campaign
+  rights, without inheriting A's signed holder session. B's dashboard showed
+  zero claimable, **0.014 NEAR claimed**, **zero owned NFTs** and **one related
+  campaign**. My NFTs showed its current-ownership empty state and explicitly
+  limited transferred-right history coverage.
+- B's campaign #7 deposit form rejected zero and disabled review. A 0.01 NEAR
+  review showed B as payer, campaign #7 and the Zinc contract as recipient.
+  The review was exited and the amount cleared without opening wallet payment
+  confirmation. Claim Revenue remained disabled with zero claimable; the
+  claimed value was 0.014 NEAR. These checks did not submit new revenue actions.
 - MIT and release documentation were pushed in commit
   `a05aca87c9cbeeb10fe7a4989ba62025d2f5abef`. Railway deployment
   `f2774441-501f-4e83-828e-497febf434e7` reached **SUCCESS**. Post-deploy GETs to
@@ -27,8 +38,8 @@ This is an evidence checkpoint, not a security audit or a guarantee of readiness
 - No new deposit, claim or NFT transfer was submitted during these checks.
 
 This partial acceptance result does not certify automatic wallet restoration,
-account switching or a new complete financial scenario. MIT was selected by the
-owner and added to the repository.
+wallet rejection/recovery or a new complete financial scenario. MIT was selected
+by the owner and added to the repository.
 
 ## Evidence and coverage
 
@@ -66,8 +77,8 @@ is local and gitignored. Public chain state and current ownership may change.
 
 ## Remaining acceptance work
 
-1. Finish the hosted-domain wallet walkthrough: account switching, rejection and
-   recovery remain separate from the now-passed NEP-413 current-holder signing.
+1. Finish the hosted-domain wallet walkthrough: rejection and recovery remain
+   separate from the now-passed account switching and NEP-413 holder signing.
    Use a fresh campaign if demonstrating a new full financial sequence.
 2. Retest a physical phone. Nightly/Sender mobile connectivity is not certified
    by viewport tests or by desktop wallet success.
