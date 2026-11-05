@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import type { TransactionObserver, TransactionUpdate } from "../../lib/transaction-progress";
 
 export type TransactionProgressState = {
-  phase: TransactionUpdate["phase"] | "confirmed" | "rejected" | "failed" | "unconfirmed";
+  phase: TransactionUpdate["phase"] | "confirmed" | "rejected" | "failed" | "unconfirmed" | "not-submitted";
   hash?: string;
 };
 
@@ -21,7 +21,8 @@ export function useTransactionProgress() {
       return result;
     } catch (error) {
       const message = typeof error === "string" ? error : error && typeof error === "object" && "message" in error && typeof error.message === "string" ? error.message : "";
-      const phase = /reject|cancel|denied|declin/i.test(message) ? "rejected"
+      const notSubmitted = error && typeof error === "object" && "code" in error && error.code === "ZINC_WALLET_NOT_SUBMITTED";
+      const phase = notSubmitted ? "not-submitted" : /reject|cancel|denied|declin/i.test(message) ? "rejected"
         : /failed on NEAR|transaction failed on NEAR|payout was not successful/i.test(message) ? "failed" : "unconfirmed";
       setProgress((current) => ({ ...current, phase }));
       throw error;
@@ -38,6 +39,7 @@ const messages: Record<TransactionProgressState["phase"], [string, string]> = {
   rejected: ["Wallet request rejected", "No success was confirmed. Check wallet activity if you already approved the transaction."],
   failed: ["Transaction did not complete successfully", "Check the transaction details and refresh balances or ownership before retrying."],
   unconfirmed: ["Confirmation unavailable", "A successful result was not received. Check wallet activity and refresh the page data before submitting again."],
+  "not-submitted": ["Not submitted · reconnect wallet", "The session check stopped this request before signing. Reconnect the intended wallet, then review your request again. No transaction was retried."],
 };
 
 export default function TransactionProgress({ progress }: { progress: TransactionProgressState | null }) {

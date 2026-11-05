@@ -10,6 +10,7 @@ import { reportTransaction, type TransactionObserver } from "./transaction-progr
 import { beginTransactionAttempt, updateTransactionAttempt, type TransactionAttempt } from "./transaction-journal";
 import { verifyExecution } from "./verify-transaction";
 import { beginBrowserWrite, browserReads } from "./read-scheduler";
+import { assertWalletSession, WalletSessionError } from "./wallet-session";
 
 const GAS = BigInt("100000000000000");
 
@@ -19,6 +20,7 @@ async function sendTransaction(selector: WalletSelector, options: SendOptions, o
   reportTransaction(observer, { phase: "preparing" });
   const accountId = selector.store.getState().accounts.find((account) => account.active)?.accountId;
   if (!accountId) throw new Error("Connect your wallet before submitting a transaction.");
+  assertWalletSession(selector, accountId);
   const attempt = beginTransactionAttempt({ ...details, accountId });
   browserReads.invalidate();
   const finishWrite = beginBrowserWrite();
@@ -26,6 +28,7 @@ async function sendTransaction(selector: WalletSelector, options: SendOptions, o
   try {
     const wallet = await selector.wallet();
     if (selector.store.getState().accounts.find((account) => account.active)?.accountId !== accountId) throw new Error("Your wallet account changed. Refresh before trying again.");
+    assertWalletSession(selector, accountId);
     reportTransaction(observer, { phase: "wallet" });
     const outcome = await wallet.signAndSendTransaction({ ...options, signerId: accountId });
     reportTransaction(observer, { phase: "verifying", hash: outcome?.transaction.hash });
@@ -39,7 +42,9 @@ async function sendTransaction(selector: WalletSelector, options: SendOptions, o
     if (result.state !== "confirmed") throw new Error(result.state === "failed" ? `The transaction failed on NEAR. ${result.reason}` : result.reason);
     return outcome;
   } catch (error) {
-    if (!verified) updateTransactionAttempt(attempt.id, { state: "unconfirmed", reason: "No verified result was received. Check wallet activity before submitting again." });
+    if (!verified) updateTransactionAttempt(attempt.id, error instanceof WalletSessionError
+      ? { state: "not-submitted", reason: error.message }
+      : { state: "unconfirmed", reason: "No verified result was received. Check wallet activity before submitting again." });
     throw error;
   } finally {
     finishWrite();

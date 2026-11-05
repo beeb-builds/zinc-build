@@ -2,7 +2,7 @@ import { NEAR_NETWORK_ID, ZINC_CONTRACT_ID } from "./near";
 import type { ActivityKind } from "./zinc-activity";
 
 export type TransactionMethod = "create_campaign" | "deposit_revenue" | "claim_revenue" | "nft_transfer";
-export type AttemptState = "waiting" | "unconfirmed" | "confirmed" | "failed";
+export type AttemptState = "waiting" | "unconfirmed" | "confirmed" | "failed" | "not-submitted";
 export type TransactionAttempt = {
   id: string;
   accountId: string;
@@ -35,7 +35,7 @@ export function readTransactionAttempts(): TransactionAttempt[] {
     if (!Array.isArray(rows)) throw new Error("Invalid transaction journal.");
     fallback = rows.filter((row): row is TransactionAttempt => row && typeof row === "object" &&
       typeof row.id === "string" && typeof row.accountId === "string" && methods.includes(row.method) &&
-      ["waiting", "unconfirmed", "confirmed", "failed"].includes(row.state) &&
+      ["waiting", "unconfirmed", "confirmed", "failed", "not-submitted"].includes(row.state) &&
       typeof row.args === "object" && row.args !== null && !Array.isArray(row.args) &&
       typeof row.deposit === "string" && /^\d+$/.test(row.deposit) &&
       typeof row.startedAt === "number" && Number.isFinite(row.startedAt) && row.startedAt >= 0 && row.startedAt <= 8640000000000000 &&
@@ -63,7 +63,7 @@ export function beginTransactionAttempt(details: Omit<TransactionAttempt, "id" |
     throw new Error("A matching request is unresolved. Use Transaction recovery to check wallet activity before submitting it again.");
   }
   // Keep unresolved attempts; bound only old resolved records.
-  save([entry, ...rows.filter((row) => row.state === "waiting" || row.state === "unconfirmed"), ...rows.filter((row) => row.state === "confirmed" || row.state === "failed").slice(0, 19)]);
+  save([entry, ...rows.filter((row) => row.state === "waiting" || row.state === "unconfirmed"), ...rows.filter((row) => row.state === "confirmed" || row.state === "failed" || row.state === "not-submitted").slice(0, 19)]);
   return entry;
 }
 

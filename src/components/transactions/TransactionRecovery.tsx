@@ -29,14 +29,14 @@ function AccountRecovery({ accountId }: { accountId: string }) {
     return () => { window.removeEventListener(JOURNAL_CHANGED, update); window.removeEventListener("storage", update); };
   }, [accountId]);
   const unresolved = attempts.filter((entry) => entry.state === "waiting" || entry.state === "unconfirmed");
-  const resolved = attempts.filter((entry) => entry.state === "confirmed" || entry.state === "failed");
+  const resolved = attempts.filter((entry) => entry.state === "confirmed" || entry.state === "failed" || entry.state === "not-submitted");
   if (!attempts.length && !storageUnavailable) return null;
   return <section aria-label="Transaction recovery" className="mb-6 rounded-2xl border border-[#FF8E9C]/20 bg-[#122344] p-5">
     <h2 className="font-semibold text-white">Transaction recovery{unresolved.length ? ` · ${unresolved.length} awaiting a verified result` : ""}</h2>
     <p className="mt-2 text-xs leading-5 text-[#A9B6CF]">Saved attempts from this browser for your connected account. A wallet prompt alone does not prove submission. Check wallet activity before trying an uncertain transaction again. Zinc never resubmits from this panel.</p>
     {storageUnavailable && <p role="alert" className="mt-3 text-xs text-[#FF8E9C]">Browser storage is unavailable. Attempts are remembered only while this page stays open.</p>}
     {unresolved.map((attempt) => <RecoveryRow key={attempt.id} attempt={attempt} returnedHash={returnedHash} />)}
-    {resolved.length > 0 && <details className="mt-4"><summary className="cursor-pointer text-sm text-[#A9B6CF]">Recent verified results ({resolved.length})</summary><div className="mt-3 space-y-3">{resolved.slice(0, 5).map((attempt) => <RecoveryRow key={attempt.id} attempt={attempt} />)}</div></details>}
+    {resolved.length > 0 && <details className="mt-4"><summary className="cursor-pointer text-sm text-[#A9B6CF]">Recent results ({resolved.length})</summary><div className="mt-3 space-y-3">{resolved.slice(0, 5).map((attempt) => <RecoveryRow key={attempt.id} attempt={attempt} />)}</div></details>}
   </section>;
 }
 
@@ -61,7 +61,7 @@ function RecoveryRow({ attempt, returnedHash }: { attempt: TransactionAttempt; r
     } finally { locked.current = false; setBusy(false); }
   }
   return <div className="mt-4 rounded-xl border border-[#293954] bg-[#0B1933] p-4">
-    <div className="flex flex-wrap items-center justify-between gap-2"><p className="text-sm font-semibold text-white">{attempt.kind}{attempt.campaignId !== undefined ? ` · Campaign #${attempt.campaignId}` : ""}</p><span className={`text-xs ${attempt.state === "confirmed" ? "text-[#69dab8]" : "text-[#FF8E9C]"}`}>{attempt.state === "waiting" ? "Wallet request started · result unknown" : attempt.state === "unconfirmed" ? "Not yet verified" : attempt.state === "confirmed" ? "Confirmed" : "Execution / payout failed"}</span></div>
+    <div className="flex flex-wrap items-center justify-between gap-2"><p className="text-sm font-semibold text-white">{attempt.kind}{attempt.campaignId !== undefined ? ` · Campaign #${attempt.campaignId}` : ""}</p><span className={`text-xs ${attempt.state === "confirmed" ? "text-[#69dab8]" : "text-[#FF8E9C]"}`}>{attempt.state === "waiting" ? "Wallet request started · result unknown" : attempt.state === "unconfirmed" ? "Not yet verified" : attempt.state === "not-submitted" ? "Not submitted · reconnect wallet" : attempt.state === "confirmed" ? "Confirmed" : "Execution / payout failed"}</span></div>
     {attempt.tokenId && <p className="mt-2 break-all font-mono text-xs text-[#A9B6CF]">{attempt.tokenId}</p>}
     {attempt.campaignName && <p className="mt-2 break-words text-xs text-[#A9B6CF]">{attempt.campaignName}</p>}
     {attempt.amountYocto && <p className="mt-2 break-all text-xs text-[#A9B6CF]">Deposit: {yoctoToNear(BigInt(attempt.amountYocto))} NEAR</p>}

@@ -55,6 +55,11 @@ able to reach NEAR Testnet. Nightly's own "could not connect ... Near network"
 screen requires troubleshooting within the wallet/network; Zinc cannot change
 the wallet's internal RPC configuration.
 
+Zinc checks Nightly's live injected session before signing and offers explicit
+reconnection when cached accounts are stale. It never automatically resubmits
+a transaction. See [wallet session recovery](docs/WALLET_SESSION_RECOVERY.md)
+for tested behavior and remaining real-device checks.
+
 The build/dev pre-hooks apply a version-guarded compatibility patch to Sender
 10.1.4: its mobile exclusion is relaxed only when `window.near.isSender` is
 already present. Official signing methods remain unchanged. Ordinary mobile
@@ -199,7 +204,7 @@ After a further user-confirmed transfer, block **276058888** showed B owning it
 again, with those same claimed/deposit totals and zero claimable for both.
 Always inspect the live owner rather than assuming a recorded snapshot persists.
 
-Latest frontend verification: **29 regression scripts**, lint and production
+Latest frontend verification: **30 regression scripts**, lint and production
 build passed. These fixtures cover exact amounts, wallet lifecycle, recovery,
 ownership refresh, authorization and RPC failures. They do not certify every
 wallet/browser combination. From the repo root:

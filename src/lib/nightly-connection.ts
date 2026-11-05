@@ -1,4 +1,5 @@
 import type { InjectedWallet, WalletModuleFactory } from "@near-wallet-selector/core";
+import { assertNightlySession, bindNightlyProvider, nightlySessionIssue, nightlySigningError, restoreNightlySession } from "./wallet-session";
 
 export function nightlyConnectionError(error: unknown): Error {
   const code = error && typeof error === "object" && "code" in error ? error.code : undefined;
@@ -21,7 +22,7 @@ export async function waitForNightlyProvider(timeoutMs = 8000): Promise<void> {
   }
 }
 
-// Keep the official adapter's signing/account behavior; only improve connection handling.
+// Keep the official transaction/signature formats; validate its cached session.
 export function withNightlyConnection(factory: WalletModuleFactory<InjectedWallet>): WalletModuleFactory<InjectedWallet> {
   return async (options) => {
     const nightlyModule = await factory(options);
@@ -30,15 +31,52 @@ export function withNightlyConnection(factory: WalletModuleFactory<InjectedWalle
       ...nightlyModule,
       async init(context) {
         await waitForNightlyProvider();
+        bindNightlyProvider();
+        const provider = window.nightly!.near;
         let wallet;
         try { wallet = await nightlyModule.init(context); }
         catch (error) { throw nightlyConnectionError(error); }
         return {
           ...wallet,
           async signIn(params) {
-            try { return await wallet.signIn(params); }
+            try {
+              // Upstream signIn returns cached accounts even when isConnected is false.
+              if (nightlySessionIssue(provider.account?.accountId ?? "")) {
+                if (window.nightly?.near !== provider) throw new Error("The extension changed. Reload Zinc before reconnecting.");
+                await provider.connect((account) => {
+                  if (!account) context.emitter.emit("signedOut", null);
+                  else context.emitter.emit("accountsChanged", { accounts: [{ accountId: account.accountId, publicKey: account.publicKey.toString() }] });
+                });
+                restoreNightlySession(provider.account?.accountId ?? "");
+              }
+              assertNightlySession(provider.account?.accountId ?? "");
+              return await wallet.signIn(params);
+            }
             catch (error) { throw nightlyConnectionError(error); }
           },
+          async getAccounts() {
+            if (nightlySessionIssue(provider.account?.accountId ?? "")) return [];
+            return wallet.getAccounts();
+          },
+          async signAndSendTransaction(params) {
+            const accountId = params.signerId ?? context.store.getState().accounts.find((account) => account.active)?.accountId ?? "";
+            assertNightlySession(accountId);
+            try { return await wallet.signAndSendTransaction(params); }
+            catch (error) { throw nightlySigningError(error, accountId); }
+          },
+          async signAndSendTransactions(params) {
+            const accountId = context.store.getState().accounts.find((account) => account.active)?.accountId ?? "";
+            assertNightlySession(accountId);
+            for (const transaction of params.transactions) if (transaction.signerId) assertNightlySession(transaction.signerId);
+            try { return await wallet.signAndSendTransactions(params); }
+            catch (error) { throw nightlySigningError(error, accountId); }
+          },
+          ...(wallet.signMessage && { async signMessage(params: Parameters<NonNullable<typeof wallet.signMessage>>[0]) {
+            const accountId = context.store.getState().accounts.find((account) => account.active)?.accountId ?? "";
+            assertNightlySession(accountId);
+            try { return await wallet.signMessage!(params); }
+            catch (error) { throw nightlySigningError(error, accountId); }
+          } }),
         };
       },
     };

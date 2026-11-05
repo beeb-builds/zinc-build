@@ -34,7 +34,7 @@ assert.equal(evidence.successfulDepositAmount(null, 6, signer, amount), null);
   assert.ok(html.includes("Support payment confirmed")); assert.ok(html.includes(`/txns/${hash}`)); assert.ok(html.includes('href="/campaigns/6"')); assert.ok(html.includes("Do not repeat the payment"));
   html = renderToStaticMarkup(React.createElement(receipt.default, { receipt: { campaignId: 6, accountId: signer, hash, amountYocto: null }, support: false }));
   assert.ok(html.includes("Revenue deposit confirmed")); assert.ok(html.includes("Amount evidence unavailable")); assert.ok(!html.includes("0.1 NEAR"));
-  const writes = load("src/lib/zinc-write.ts", { "@near-wallet-selector/core": {}, "near-api-js": near, "./near": config, "./zinc-activity": {}, "./transaction-progress": {}, "./transaction-journal": {}, "./verify-transaction": {}, "./read-scheduler": {} });
+  const writes = load("src/lib/zinc-write.ts", { "@near-wallet-selector/core": {}, "near-api-js": near, "./near": config, "./zinc-activity": {}, "./transaction-progress": {}, "./transaction-journal": {}, "./verify-transaction": {}, "./read-scheduler": {}, "./wallet-session": {} });
   let slots, index, wallet, calls, clock, reject;
   const hooks = { ...React, useState(initial) { const key = index++; if (!(key in slots)) slots[key] = typeof initial === "function" ? initial() : initial; return [slots[key], (value) => { slots[key] = typeof value === "function" ? value(slots[key]) : value; }]; },
     useRef(initial) { const key = index++; if (!(key in slots)) slots[key] = { current: initial }; return slots[key]; }, useEffect() {}, useTransition: () => [false, (callback) => callback()] };

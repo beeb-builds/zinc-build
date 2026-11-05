@@ -179,9 +179,10 @@ Final local proofs: `data/live-b-future-claim-proof-2026-11-05.json` and
 
 ## Remaining acceptance work
 
-1. Investigate Nightly's observed session disconnects and finish explicit
-   rejection coverage. Manual recovery and the full financial retest passed;
-   automatic wallet restoration and rejection behavior are not certified by it.
+1. Retest the [wallet-session recovery fix](WALLET_SESSION_RECOVERY.md) with the
+   real Nightly extension. Thirty regressions and six isolated Chrome journeys
+   cover stale sessions, explicit reconnect and cancelled reconnects; they do not
+   certify the extension's own reliability or every wallet rejection path.
 2. Retest a physical phone. Nightly/Sender mobile connectivity is not certified
    by viewport tests or by desktop wallet success.
 3. Demonstrate revocation with a non-sensitive published brief already rendered

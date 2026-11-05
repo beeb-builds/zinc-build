@@ -13,6 +13,7 @@ const transpile = (path) => ts.transpileModule(fs.readFileSync(path, "utf8"), {
   const observer = {};
   vm.runInNewContext(transpile("src/lib/transaction-progress.ts"), { exports: observer });
   const recorded = [], calls = [], steps = [];
+  const attempts = [], updates = [];
   let returned;
   const success = (value = "") => ({
     transaction: { hash: "1".repeat(44), signer_id: "alice.testnet", receiver_id: "zinc-builder-2026.testnet" },
@@ -28,6 +29,8 @@ const transpile = (path) => ts.transpileModule(fs.readFileSync(path, "utf8"), {
     } }),
   };
   const writes = {};
+  const walletSession = {};
+  vm.runInNewContext(transpile("src/lib/wallet-session.ts"), { exports: walletSession });
   const verification = {};
   vm.runInNewContext(transpile("src/lib/verify-transaction.ts"), { exports: verification, atob, TextDecoder, Uint8Array,
     require: () => ({ ZINC_CONTRACT_ID: "zinc-builder-2026.testnet" }) });
@@ -37,9 +40,10 @@ const transpile = (path) => ts.transpileModule(fs.readFileSync(path, "utf8"), {
     if (id === "./near") return { ZINC_CONTRACT_ID: "zinc-builder-2026.testnet" };
     if (id === "./transaction-progress") return observer;
     if (id === "./zinc-activity") return { recordConfirmedActivity: (...args) => recorded.push(args) };
-    if (id === "./transaction-journal") return { beginTransactionAttempt: () => ({ id: "mock-attempt" }), updateTransactionAttempt: () => {} };
+    if (id === "./transaction-journal") return { beginTransactionAttempt: () => { attempts.push(true); return { id: "mock-attempt" }; }, updateTransactionAttempt: (_id, value) => updates.push(value) };
     if (id === "./verify-transaction") return verification;
     if (id === "./read-scheduler") return { browserReads: { invalidate() {} }, beginBrowserWrite: () => () => {} };
+    if (id === "./wallet-session") return walletSession;
     return require(id);
   } });
   returned = success();
@@ -68,6 +72,16 @@ const transpile = (path) => ts.transpileModule(fs.readFileSync(path, "utf8"), {
   await assert.rejects(writes.depositRevenueOnNear(selector, 6, "1"));
   returned = new Error("User rejected");
   await assert.rejects(writes.transferRevenueRightOnNear(selector, "campaign:6:right:0", "bob.testnet", "alice.testnet"));
+  assert.equal(updates.at(-1).state, 'unconfirmed', 'An error after invoking signing must not be called not-submitted');
+  const beforePreflight = attempts.length;
+  const disconnected = { ...selector, store: { getState: () => ({ selectedWalletId: 'nightly', accounts: [{ accountId: 'alice.testnet', active: true }] }) } };
+  await assert.rejects(writes.claimRevenueOnNear(disconnected, 6), /No signing request was sent/);
+  assert.equal(attempts.length, beforePreflight, 'Disconnected preflight creates no unresolved journal entry');
+  let selectedWalletId;
+  const race = { store: { getState: () => ({ selectedWalletId, accounts: [{ accountId: 'alice.testnet', active: true }] }) },
+    wallet: async () => { selectedWalletId = 'nightly'; return { signAndSendTransaction() { throw Error('Must not reach signing'); } }; } };
+  await assert.rejects(writes.claimRevenueOnNear(race, 6), /No signing request was sent/);
+  assert.equal(updates.at(-1).state, 'not-submitted', 'A disconnect after preparation remains recorded but does not block safe retry');
 
   let state;
   const hooks = {};
@@ -79,6 +93,8 @@ const transpile = (path) => ts.transpileModule(fs.readFileSync(path, "utf8"), {
   await transaction.run(async (report) => { report({ phase: "verifying", hash: "test-hash" }); return true; });
   assert.equal(state.phase, "confirmed");
   assert.equal(state.hash, "test-hash");
+  await assert.rejects(transaction.run(async () => { throw new walletSession.WalletSessionError('Reconnect before signing'); }));
+  assert.equal(state.phase, 'not-submitted');
   for (const [message, expected] of [["No confirmation returned", "unconfirmed"], ["User rejected", "rejected"], ["The deposit failed on NEAR", "failed"]]) {
     await assert.rejects(transaction.run(async () => { throw new Error(message); }));
     assert.equal(state.phase, expected);
