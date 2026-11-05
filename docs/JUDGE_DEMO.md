@@ -95,6 +95,16 @@ The read-only recheck on **November 4, 2026, 16:35 UTC**, at finalized block
 0.02 NEAR deposited, A claimed 0.006, B claimed 0.014, and both claimable zero.
 This recheck submitted no transaction and does not replace a fresh signed demo.
 
+The **November 5 hosted retest** subsequently transferred the NFT from A to B,
+preserved A's 0.0066 NEAR accrued balance, and deposited another 0.01 NEAR that
+accrued entirely to B (60% NFT plus 40% treasury). A claimed its retained 0.0066;
+B claimed the later 0.01; all payout callbacks completed successfully.
+At finalized block **276278897**, B owned the NFT, both claimable amounts were
+zero, and campaign #7's lifetime claimed totals (A 0.0126 + B 0.0284) equalled
+its 0.041 NEAR deposits. Use the
+[dated public receipt links](RELEASE_ACCEPTANCE.md#live-deposits-and-claim-retest-november-5-wat)
+and disclose the recorded Nightly reconnection/recovery steps when presenting it.
+
 For fresh runs, use `node scripts/read-wallet-baseline.mjs A_PUBLIC_ID B_PUBLIC_ID`
 with actual public IDs between stages. It pins views to one finalized block and
 records exact strings. It never signs/submits or proves account control.

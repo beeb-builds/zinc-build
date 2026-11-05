@@ -13,9 +13,11 @@ See [release acceptance](RELEASE_ACCEPTANCE.md) for dated verification and
 Old hosting failures below are historical records, not the current deployment.
 
 Two finishing tasks: audit the release evidence and prepare the README/judge
-walkthrough. MIT is now selected and the LICENSE file is added. Physical-phone
-wallet acceptance, fresh hosted signed flows, development-provenance confirmation
-and the human's demo post remain outstanding.
+walkthrough. MIT is now selected and the LICENSE file is added. The November 5
+hosted financial retest passed deposits, NFT transfer, historical/future revenue
+separation and final payouts; campaign #7's claimed totals reconcile to 0.041 NEAR.
+Physical-phone wallet acceptance, wallet-session reliability/rejection coverage,
+development-provenance confirmation and the human's demo post remain outstanding.
 No new contract deployment is needed for these tasks.
 
 ## Historical progress: batch 9

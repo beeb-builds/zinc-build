@@ -234,6 +234,12 @@ read-only recheck at finalized block **276220305** found campaign #7's right
 owned by A, with deposits and claimed values unchanged. Ownership is a
 point-in-time observation, not a permanent property of the demo.
 
+On November 5, a further hosted financial retest passed deposits, NFT transfer,
+historical/future revenue separation and completed payouts. At finalized block
+**276278897**, campaign #7 had **0.041 NEAR deposited**, A claimed **0.0126 NEAR**,
+B claimed **0.0284 NEAR**, both claimable zero, and B owned the NFT. The totals
+reconcile exactly. See [public transaction proofs and wallet-recovery limits](docs/RELEASE_ACCEPTANCE.md#live-deposits-and-claim-retest-november-5-wat).
+
 ## Scope and limits
 
 - Native NEAR support is an explicit campaign deposit. External project income

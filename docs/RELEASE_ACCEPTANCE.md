@@ -75,11 +75,113 @@ Account IDs and the historical transfer sequence are in the
 It pins all reads to one finalized block and never signs. The generated snapshot
 is local and gitignored. Public chain state and current ownership may change.
 
+## Live deposits and claim retest: November 5 (WAT)
+
+These are new user-approved transactions after the non-financial checks above.
+They reuse campaign #7, which already had 0.02 NEAR deposited and earlier claims.
+
+| Action | Verified public transaction | Result |
+| --- | --- | --- |
+| B deposits 0.01 NEAR | [C1KfhkhGowooiEVUS5zf551PzRrxopp29xhaCv2GeSoi](https://testnet.nearblocks.io/txns/C1KfhkhGowooiEVUS5zf551PzRrxopp29xhaCv2GeSoi) | FINAL; correct contract, method, campaign and attached amount; successful receipts |
+| B deposits another 0.001 NEAR | [3JoK4LAEzYVk3ReLTHXwzNX5qeF2UiEaNifYEJuafr5V](https://testnet.nearblocks.io/txns/3JoK4LAEzYVk3ReLTHXwzNX5qeF2UiEaNifYEJuafr5V) | FINAL; same payload checks; campaign deposits reach 0.031 NEAR |
+| B claims 0.0044 NEAR | [4bYhg84d9Bych4mXc5UcoDzV8wFs3m8vvcBPuYJ3XLZJ](https://testnet.nearblocks.io/txns/4bYhg84d9Bych4mXc5UcoDzV8wFs3m8vvcBPuYJ3XLZJ) | FINAL; attached deposit zero; actual native payout 0.0044 NEAR, callback true; six receipt outcomes verified |
+
+The claim initially returned Nightly's generic `Request failed` without a hash.
+The user checked wallet activity and reported no claim entry. Finalized balances
+were unchanged. With explicit approval, only the unverified local reminder was
+removed, and one fresh claim was approved manually. That claim succeeded. The
+underlying cause of the first wallet error was not established; no source patch
+was made on the basis of that error alone.
+
+Finalized block **276265490** (`FgriT1rgKxHJvJzJRDkRqD9RxvHCHgn1JoSBwQGu6imk`)
+confirmed campaign #7 deposits **0.031 NEAR**, B claimable **zero**, B claimed
+**0.0184 NEAR**. A still owned `campaign:7:right:0`, with **0.0066 NEAR claimable**
+and **0.006 NEAR previously claimed** in this campaign. The UI showed the same
+values, a verified payout receipt and a disabled zero-balance claim button.
+
+Local, gitignored proof files: `data/live-deposit-proof-2026-11-05.json`,
+`data/live-b-claim-proof-2026-11-05.json` and
+`data/wallet-acceptance-276265490-1793836415530.json`.
+
+The user subsequently transferred `campaign:7:right:0` from A to B:
+[4UEiG63GE7iXGWLYbn6crddvM56zDmo4mhVzFQGgUiUw](https://testnet.nearblocks.io/txns/4UEiG63GE7iXGWLYbn6crddvM56zDmo4mhVzFQGgUiUw).
+Independent RPC verification found FINAL execution, method `nft_transfer`, the
+correct token/receiver and exactly one yoctoNEAR attached, with successful
+receipts. At finalized block **276277315**, B owned the right; A retained
+**0.0066 NEAR claimable**, B remained at zero claimable, and deposits remained
+0.031 NEAR. A's My NFTs view moved the right to Transferred Rights and displayed
+the retained historical balance. Local evidence:
+`data/live-transfer-proof-2026-11-05.json` and
+`data/wallet-acceptance-276277315-1793843447121.json` (gitignored).
+
+A then deposited another **0.01 NEAR** after the transfer:
+[AQPdvtN7mGJEfqJihBmXa7EWagLtczSGG6C1J8yGbYfk](https://testnet.nearblocks.io/txns/AQPdvtN7mGJEfqJihBmXa7EWagLtczSGG6C1J8yGbYfk).
+RPC verification confirmed the exact attached amount, campaign #7,
+`deposit_revenue`, correct signer/contract and FINAL successful receipts.
+At finalized block **276277702**
+(`7KBkt1WabE3qtagyFGsMkP88npbbr6wMXYBaCcz7BzwF`), deposits were **0.041 NEAR**.
+A's claimable stayed **0.0066 NEAR**; B's claimable rose from zero to **0.01 NEAR**.
+B receives both the 60% NFT allocation and its existing 40% treasury allocation.
+Thus B did not acquire A's historical 0.0066 NEAR, and A earned none of the later
+deposit. Proof: `data/live-post-transfer-deposit-proof-2026-11-05.json` and
+`data/wallet-acceptance-276277702-1793843676504.json` (gitignored).
+
+A's former-owner historical claim then succeeded:
+[3K2aZKyc3tHyYpQxq9eMVs3uHAektgGkTCQZVf99zBao](https://testnet.nearblocks.io/txns/3K2aZKyc3tHyYpQxq9eMVs3uHAektgGkTCQZVf99zBao).
+RPC receipt verification confirmed **0.0066 NEAR** actually transferred to A,
+callback **true**, FINAL execution and six receipt outcomes. At finalized block
+**276278520**, A's claimable was zero and claimed was **0.0126 NEAR**; B still
+owned the NFT and had **0.01 NEAR claimable**. This demonstrates that a former
+holder can withdraw accrued revenue after transfer and after a later deposit.
+The UI showed the verified payout and a disabled zero-balance claim button.
+
+Before this success, Nightly returned `Not connected` while the app still showed
+A's selected account. The unresolved-attempt guard blocked repeated requests.
+The user reconnected A, checked wallet activity and removed the unverified local
+reminder; one fresh manually approved claim then succeeded. This records an
+observed wallet-session recovery, not a diagnosis or fix of the underlying
+disconnect. No request was automatically resubmitted.
+Proof: `data/live-a-historical-claim-proof-2026-11-05.json` and
+`data/wallet-acceptance-276278520-1793844171256.json` (gitignored).
+
+B's future-revenue claim also succeeded:
+[2q6H34tz9LxpyAho8UaJezf7eXLr7qvhko7UnbNrDy6s](https://testnet.nearblocks.io/txns/2q6H34tz9LxpyAho8UaJezf7eXLr7qvhko7UnbNrDy6s).
+Independent RPC verification confirmed an actual **0.01 NEAR** native payout to
+B, callback **true**, FINAL execution and six receipt outcomes. The payout
+includes B's new 60% NFT share plus its existing 40% treasury share.
+
+At finalized block **276278897**
+(`4TVCEfrFVp7XdAZrM2KXTkvT2aLMyhnqj9oXtVghTP7Y`):
+
+| Campaign #7 ledger | Amount |
+| --- | ---: |
+| Lifetime deposited | 0.041 NEAR |
+| A lifetime claimed | 0.0126 NEAR |
+| B lifetime claimed | 0.0284 NEAR |
+| A claimable | 0 NEAR |
+| B claimable | 0 NEAR |
+| Current NFT owner | B |
+
+BigInt reconciliation confirmed the two claimed totals sum exactly to campaign
+deposits. These are campaign #7 totals, not all-campaign balances or wallet net
+balance changes after gas. Earlier campaign claims are included in lifetime
+totals. New deposits in this retest were 0.021 NEAR, matched by new payouts of
+0.0044 + 0.0066 + 0.01 NEAR.
+
+**Financial retest result: passed** for explicit deposits, a one-yocto NFT
+transfer, historical/future entitlement separation, the former-owner payout,
+the current-owner/treasury payout, completed callbacks and exact reconciliation.
+Wallet-session failures and recovery described above remain material limits;
+this does not certify unattended signing, every browser or physical phones.
+No contract changes or contract deployment were needed.
+Final local proofs: `data/live-b-future-claim-proof-2026-11-05.json` and
+`data/wallet-acceptance-276278897-1793844396377.json` (gitignored).
+
 ## Remaining acceptance work
 
-1. Finish the hosted-domain wallet walkthrough: rejection and recovery remain
-   separate from the now-passed account switching and NEP-413 holder signing.
-   Use a fresh campaign if demonstrating a new full financial sequence.
+1. Investigate Nightly's observed session disconnects and finish explicit
+   rejection coverage. Manual recovery and the full financial retest passed;
+   automatic wallet restoration and rejection behavior are not certified by it.
 2. Retest a physical phone. Nightly/Sender mobile connectivity is not certified
    by viewport tests or by desktop wallet success.
 3. Demonstrate revocation with a non-sensitive published brief already rendered
@@ -90,6 +192,8 @@ is local and gitignored. Public chain state and current ownership may change.
    the [submission checklist](SUBMISSION_CHECKLIST.md). The owner selected MIT;
    [LICENSE](../LICENSE) now records it.
 
-No contract deployment, new financial transaction or hackathon submission was
-performed during this checkpoint. Existing activity is a partial verified record,
-not a complete indexer. Zinc uses central contract custody, not per-NFT accounts.
+The initial read-only checkpoint submitted no financial transactions. The later
+live retest above records its user-approved deposits, transfer and claims separately. No
+contract deployment or hackathon submission was performed. Existing activity is
+a partial verified record, not a complete indexer. Zinc uses central contract
+custody, not per-NFT accounts.

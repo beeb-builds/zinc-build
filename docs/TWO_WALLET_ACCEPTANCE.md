@@ -12,6 +12,17 @@ Both public IDs are now recorded. No keys or recovery phrases are needed.
 The core signed two-account execution passed on November 3. Remaining reload,
 hosted-origin and physical-device checks are separate from that completed run.
 
+## November 5 live financial retest
+
+The subsequent hosted retest completed additional deposits, A-to-B NFT transfer,
+retained historical revenue, a later deposit and both owners' payouts. See
+[the dated receipt evidence and exact reconciliation](RELEASE_ACCEPTANCE.md#live-deposits-and-claim-retest-november-5-wat).
+At finalized block **276278897**, campaign #7 had 0.041 NEAR deposited, A had
+claimed 0.0126 NEAR, B had claimed 0.0284 NEAR, both were zero claimable, and B
+owned `campaign:7:right:0`. Every new payout's callback returned true with FINAL
+execution. Wallet-session errors required explicit recovery; phone acceptance
+remains separate. Earlier snapshots below are historical, not current ownership.
+
 ## Latest read-only recheck: November 4
 
 At **2026-11-04T16:35:51.586Z**, finalized block **276220305**
