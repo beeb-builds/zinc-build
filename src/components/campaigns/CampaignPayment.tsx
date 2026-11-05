@@ -23,7 +23,7 @@ export default function CampaignPayment({ campaign, rights, initiallyActive }: {
           <p className="mt-4 whitespace-pre-wrap break-words text-sm leading-7 text-[#A9B6CF]">{campaign.description}</p>
           <dl className="mt-6 space-y-4 border-t border-[#293954] pt-5">
             <Field label={`Campaign #${campaign.id} · Created by`} value={campaign.creator} />
-            <Field label="Support window (UTC)" value={`${date(campaign.start_timestamp_ms)} — ${date(campaign.end_timestamp_ms)}`} />
+            <Field label="Support window (UTC)" value={`${date(campaign.start_timestamp_ms)} to ${date(campaign.end_timestamp_ms)}`} />
             <Field label="Lifetime campaign deposits" value={`${yoctoToNear(BigInt(campaign.total_deposited_yocto))} NEAR`} />
           </dl>
           <Link href={`/campaigns/${campaign.id}`} className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-[#FF8E9C]">Inspect campaign &amp; revenue rights <ArrowUpRight size={15} /></Link>

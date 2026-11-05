@@ -13,6 +13,6 @@ export default function ProjectOnboarding() {
     <div className="grid gap-4 lg:grid-cols-3">{paths.map(({ href, title, role, description, Icon }) => <Link key={href} href={href} aria-label={title} className="zinc-interactive-surface rounded-[24px] border border-white/[0.08] bg-[#10213d] p-5">
       <div className="flex items-center justify-between"><Icon size={23} className="text-[#ff9988]" /><ArrowUpRight size={18} className="text-[#8fa0bc]" /></div><p className="mt-5 text-xs text-[#8fa0bc]">{role}</p><h3 className="mt-2 text-lg font-semibold text-white">{title}</h3><p className="mt-3 text-sm leading-6 text-[#aebbd0]">{description}</p>
     </Link>)}</div>
-    <Link href="/gallery" className="mt-4 inline-flex text-sm font-semibold text-[#ff9988]">See the public NFT gallery—no wallet required ↗</Link>
+    <Link href="/gallery" className="mt-4 inline-flex text-sm font-semibold text-[#ff9988]">See the public NFT gallery (no wallet required) ↗</Link>
   </section>;
 }

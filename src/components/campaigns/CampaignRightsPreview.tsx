@@ -22,7 +22,7 @@ export default function CampaignRightsPreview({ campaignName, contributors, trea
         <div className="relative my-5 min-h-28">
           <svg aria-hidden="true" viewBox="0 0 160 140" className="pointer-events-none absolute -right-5 top-0 h-32 w-40 text-[#ff9988] opacity-40"><g transform={`translate(80 70) rotate(${index * 37})`} fill="none" stroke="currentColor">{[0, 30, 60, 90, 120, 150].map((rotation) => <ellipse key={rotation} rx="60" ry="23" transform={`rotate(${rotation})`} strokeWidth="0.7" />)}</g></svg>
           <p className="relative text-[10px] uppercase tracking-[0.16em] text-[#aebbd0]">Future revenue share</p>
-          <p className="relative mt-2 text-5xl font-semibold tracking-tight text-white">{Number.isFinite(contributor.share) ? `${contributor.share}%` : "—"}</p>
+          <p className="relative mt-2 text-5xl font-semibold tracking-tight text-white">{Number.isFinite(contributor.share) ? `${contributor.share}%` : "Not set"}</p>
           <p className="relative mt-3 break-words font-semibold text-[#f6c2b9]">{contributor.role.trim() || "Contributor role required"}</p>
         </div>
         <p className="break-words text-sm font-semibold text-white">{campaignName.trim() || "Untitled campaign"}</p>
@@ -32,7 +32,7 @@ export default function CampaignRightsPreview({ campaignName, contributors, trea
     </div>
     <div className="mt-4 rounded-2xl border border-[#293954] bg-[#0b1b34] p-5">
       <div className="flex flex-wrap items-center justify-between gap-3"><h4 className="font-semibold text-white">Project treasury</h4><span className="rounded-full border border-[#293954] px-3 py-1 text-xs text-[#9aacbf]">Account-based · No treasury NFT</span></div>
-      <dl className="mt-4 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]"><div className="min-w-0"><dt className="text-xs text-[#7185a1]">Treasury account</dt><dd className="mt-2 break-all text-sm text-[#aebbd0]">{treasuryWallet.trim() || "Treasury wallet required"}</dd></div><div><dt className="text-xs text-[#7185a1]">Revenue share</dt><dd className="mt-2 text-xl font-semibold text-[#ff9988]">{Number.isFinite(treasuryShare) ? `${treasuryShare}%` : "—"}</dd></div></dl>
+      <dl className="mt-4 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]"><div className="min-w-0"><dt className="text-xs text-[#7185a1]">Treasury account</dt><dd className="mt-2 break-all text-sm text-[#aebbd0]">{treasuryWallet.trim() || "Treasury wallet required"}</dd></div><div><dt className="text-xs text-[#7185a1]">Revenue share</dt><dd className="mt-2 text-xl font-semibold text-[#ff9988]">{Number.isFinite(treasuryShare) ? `${treasuryShare}%` : "Not set"}</dd></div></dl>
       <p className="mt-3 text-xs leading-5 text-[#7185a1]">The treasury share remains with this account. If this wallet is also listed as a contributor, it receives that contributor NFT separately.</p>
     </div>
     <div className="mt-4 rounded-2xl border border-[#69dab8]/15 bg-[#153c39]/40 p-5 text-sm leading-6 text-[#aebbd0]"><p className="font-semibold text-white">What happens when a right moves?</p><p className="mt-2">Future revenue follows the current NFT owner. Revenue earned before a transfer remains with the previous owner.</p><p className="mt-2 text-xs text-[#7185a1]">Creation does not deposit revenue or guarantee earnings. Revenue is earned from actual NEAR deposits made to the campaign during its active dates.</p></div>

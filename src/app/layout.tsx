@@ -6,7 +6,7 @@ import { WalletProvider } from "../components/wallet/WalletProvider";
 import ReadCacheSync from "../components/data/ReadCacheSync";
 
 export const metadata: Metadata = {
-  title: "Zinc — Programmable Revenue Rights",
+  title: "Zinc: Programmable Revenue Rights",
   description:
     "Campaign-based programmable NFT revenue rights built on NEAR Protocol.",
 };

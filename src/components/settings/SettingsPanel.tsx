@@ -48,7 +48,7 @@ export default function SettingsPanel() {
       <h2 className="text-xl font-semibold text-white">Wallet connection</h2>
       <dl className="mt-5 grid gap-5 sm:grid-cols-2">
         <Field label="Connected wallet account" value={accountId ?? (isInitializing ? "Checking saved wallet session..." : "No wallet connected")} />
-        <Field label="Connection status" value={accountId ? "Connected" : isInitializing ? "Initializing wallet connection..." : ready ? "Disconnected" : "Wallet initialization unavailable — retry connection"} />
+        <Field label="Connection status" value={accountId ? "Connected" : isInitializing ? "Initializing wallet connection..." : ready ? "Disconnected" : "Wallet initialization unavailable. Retry connection"} />
       </dl>
       <div className="mt-6">
         {accountId ? <button type="button" onClick={disconnectWallet} disabled={disconnecting || !selector} className={button}>{disconnecting ? "Disconnecting..." : "Disconnect Wallet"}</button>
