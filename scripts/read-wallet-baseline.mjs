@@ -65,7 +65,10 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     const config = await readFile(new URL("../src/lib/near.ts", import.meta.url), "utf8");
     const literal = (name) => { const value = new RegExp(`export const ${name} = "([^"]+)"`).exec(config)?.[1]; if (!value) throw new Error(`Missing ${name} configuration.`); return value; };
     if (literal("NEAR_NETWORK_ID") !== "testnet") throw new Error("This acceptance helper is restricted to Testnet.");
-    const snapshot = await readWalletBaseline({ rpcUrl: literal("NEAR_RPC_URL"), contractId: literal("ZINC_CONTRACT_ID"), accounts });
+    const defaultContract = /export const ZINC_CONTRACT_ID = .*?"([^"]+)"/.exec(config)?.[1];
+    const contractId = process.env.NEXT_PUBLIC_ZINC_CONTRACT_ID ?? defaultContract;
+    if (!contractId || !/^[a-z0-9][a-z0-9._-]*\.testnet$/.test(contractId)) throw new Error("A named Testnet contract account is required.");
+    const snapshot = await readWalletBaseline({ rpcUrl: literal("NEAR_RPC_URL"), contractId, accounts });
     // Preserve each before/after snapshot instead of overwriting earlier evidence.
     const destination = new URL(`../data/wallet-acceptance-${snapshot.block.height}-${Date.now()}.json`, import.meta.url);
     await mkdir(new URL("../data/", import.meta.url), { recursive: true });

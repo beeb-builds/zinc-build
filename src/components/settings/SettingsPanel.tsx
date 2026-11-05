@@ -71,6 +71,7 @@ export default function SettingsPanel() {
       </dl>
       <p className="mt-5 rounded-xl border border-[#FF8E9C]/20 bg-[#FF8E9C]/5 p-4 text-sm leading-6 text-[#FF8E9C]">Zinc is running on NEAR Testnet. Deposits, claims, and network fees use testnet NEAR. Use a testnet wallet for this prototype.</p>
       <p className="mt-3 text-xs leading-5 text-[#71809D]">The endpoint above is used for Zinc contract reads. Your connected wallet manages transaction signing and submission.</p>
+      {ZINC_CONTRACT_ID === "zinc-demo-2026.testnet" && <p className="mt-3 text-sm leading-6 text-[#A9B6CF]">This is the fresh demo deployment. Earlier campaigns, NFTs and balances remain on the previous contract. <a href="https://zinc-build-production.up.railway.app" target="_blank" rel="noopener noreferrer" className="text-[#FF8E9C] underline">Open the previous Zinc app for earlier claims</a>.</p>}
     </section>
 
     <section className={section}>

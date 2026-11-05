@@ -204,7 +204,7 @@ After a further user-confirmed transfer, block **276058888** showed B owning it
 again, with those same claimed/deposit totals and zero claimable for both.
 Always inspect the live owner rather than assuming a recorded snapshot persists.
 
-Latest frontend verification: **30 regression scripts**, lint and production
+Latest frontend verification: **31 regression scripts**, lint and production
 build passed. These fixtures cover exact amounts, wallet lifecycle, recovery,
 ownership refresh, authorization and RPC failures. They do not certify every
 wallet/browser combination. From the repo root:
