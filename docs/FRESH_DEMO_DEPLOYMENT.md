@@ -37,18 +37,40 @@ ID, not contract. Separate origins isolate browser drafts and wallet/session
 storage; transaction journals and shared activity also include the contract.
 The old app stays available for existing claims. Fresh-demo Settings links to it.
 
-## Proposed initial campaigns
+## Published demo campaigns
 
-The owner accepted these demo setups for preparation. They remain unpublished
-until reviewed and signed in the connected wallet.
+The owner reviewed and signed both campaign creations on November 5, 2026.
 
-- **Coral Studio: Demo**: creative release revenue. A Artist 60%, B Producer 20%,
+- **Coral Studio: Demo (#0)**: creative release revenue. A Artist 60%, B Producer 20%,
   B account-based treasury 20%.
-- **Orbit Indie Game: Demo**: game sales revenue. A Developer 40%, B Designer 30%,
+- **Orbit Indie Game: Demo (#1)**: game sales revenue. A Developer 40%, B Designer 30%,
   B account-based treasury 30%.
-- Both use approximately 90-day support windows beginning on creation day.
+- Both run from November 5, 2026 to February 3, 2027 at 00:00 UTC.
 - A: `77d96ac24fa9038a4be43b70f51a9bb52dda3bc074137fddb16ce5cf459dd92b`.
 - B: `d500c193b9052dd191dc69793180e5dec0cb3ee2bec9adaec646753487646671`.
 
 Each campaign totals 100% and mints two contributor NFTs. Treasury does not
 receive an NFT. Demo roles describe sample allocations, not real employment.
+
+Creation transactions:
+
+- Coral Studio: `6WBFUNoujzPdjgH56GR7nERD4FsmrxnYqz8VcPfW41yK`.
+- Orbit Indie Game: `BB5GwqpudAviHRmUCtzdfCVhuD49XnNfcEP4sWXcvjGk`.
+
+## Recorded deposit, transfer and claim walkthrough
+
+On November 5, Coral Studio received two deposits of 0.01 testnet NEAR. Between
+them, A transferred the 60% Artist NFT (`campaign:0:right:0`) to B. A retained
+and claimed 0.006 NEAR; B claimed 0.014 NEAR, including its producer and treasury
+shares. Both native payouts and their callbacks succeeded. Final reads showed
+0.02 NEAR deposited, zero claimable for both accounts, and B owning the Artist
+NFT. Orbit's deposited total remained zero. These are recorded observations;
+always read current ownership rather than assuming it cannot change.
+
+| Action | Public transaction proof |
+| --- | --- |
+| First deposit | [Confirmed deposit](https://testnet.nearblocks.io/txns/HgFphF8X47fJHz982uTtsCJs388EwNuJGstpMxU7RGyh) |
+| Artist NFT A to B | [Confirmed transfer](https://testnet.nearblocks.io/txns/EGBuh7xXCqmYfmgwXtQ55TKkME8yfhnGrSZXyVCA51Vi) |
+| Second deposit | [Confirmed deposit](https://testnet.nearblocks.io/txns/MWeTQ6RU1nNNUbXbgsXgpcJqBKa1KEeAq6wQ8d5yux8) |
+| A claims 0.006 NEAR | [Confirmed payout](https://testnet.nearblocks.io/txns/BaWbr4fMmYidAkm7zGVMs57W6oZ4webb2kjRhtRTQCmf) |
+| B claims 0.014 NEAR | [Confirmed payout](https://testnet.nearblocks.io/txns/FGH9wWtQkxvP8fZRtUSDzSMNVux88UhrY5QFp6J7sdN3) |

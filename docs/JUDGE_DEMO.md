@@ -128,7 +128,11 @@ deposit, not an NFT sale.
 ## Release and submission preparation
 
 The repository is public and the app is hosted at
-[Zinc on Railway](https://zinc-build-production.up.railway.app). Hosting uses a
+[Zinc on Railway](https://zinc-demo-production.up.railway.app). The current demo
+uses `zinc-demo-2026.testnet`, with Coral Studio at `/campaigns/0` and Orbit Indie
+Game at `/campaigns/1`. Earlier campaign #7 acceptance evidence in this guide refers to
+the [previous app](https://zinc-build-production.up.railway.app) and its original
+`zinc-builder-2026.testnet` contract. Hosting uses a
 persistent volume; a fresh hosted signed-wallet walkthrough remains separate
 from the public-page checks. Start the recording with the public NFT gallery,
 then show a project's roster and explain why its NFT controls future revenue.

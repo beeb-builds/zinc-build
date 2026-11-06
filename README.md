@@ -14,8 +14,14 @@ Repository: [beeb-builds/zinc-build](https://github.com/beeb-builds/zinc-build).
 The earlier [clean-release QA report](docs/QA_BATCH_9.md) records a passing clean working-tree
 install/build/lint, 24 regressions, 45 responsive browser checks and NFT motion /
 reduced-motion checks. Hosted wallet-signing acceptance remains a separate check.
-The Testnet app is hosted on Railway at
-[zinc-build-production.up.railway.app](https://zinc-build-production.up.railway.app).
+The current judge demo is hosted on Railway at
+**[zinc-demo-production.up.railway.app](https://zinc-demo-production.up.railway.app)**,
+using **`zinc-demo-2026.testnet`**. It contains Coral Studio: Demo (campaign #0)
+and Orbit Indie Game: Demo (campaign #1).
+The [previous app](https://zinc-build-production.up.railway.app), using
+`zinc-builder-2026.testnet`, remains available for its existing campaigns and claims.
+These are separate deployments; old campaigns were not deleted or migrated.
+See [fresh demo deployment details](docs/FRESH_DEMO_DEPLOYMENT.md).
 The [product discovery update](docs/PRODUCT_DISCOVERY.md) separates the personal
 dashboard from Explore Zinc and adds public NFT discovery and project rosters.
 
@@ -37,9 +43,20 @@ server-side wallet key. Configuration is in [src/lib/near.ts](src/lib/near.ts):
 | Setting | Value |
 | --- | --- |
 | Network | NEAR Testnet |
-| Contract | zinc-builder-2026.testnet |
+| Default local contract | zinc-builder-2026.testnet |
+| Current hosted demo contract | zinc-demo-2026.testnet |
 | Application RPC | https://test.rpc.fastnear.com |
 | Explorer | [Contract on NEAR Blocks](https://testnet.nearblocks.io/address/zinc-builder-2026.testnet) |
+| Demo explorer | [Fresh demo contract on NEAR Blocks](https://testnet.nearblocks.io/address/zinc-demo-2026.testnet) |
+
+To run against the current judge demo locally, set the public contract override
+**before building**, then start the app:
+
+~~~powershell
+$env:NEXT_PUBLIC_ZINC_CONTRACT_ID = "zinc-demo-2026.testnet"
+npm run build
+npm run start
+~~~
 
 Use **npm run dev** for development. Stop the production server before rebuilding
 its .next directory, then restart after the build. Replacing assets underneath a
@@ -77,12 +94,12 @@ scenario and exact expected amounts.
 | Open /explore | Shared platform totals, real campaign revenue charts and public discovery links. |
 | Open /gallery without a wallet | Minted revenue-right NFTs, token IDs, current owners, project filters and links to team/NFT details. |
 | Open /campaigns | On-chain campaigns, status, dates and deposited totals. |
-| Open /campaigns/7 | Acceptance campaign, creator/contributor/treasury roster, visible NFTs, original versus current owners, and deposit/claim section links. |
-| Open /rights/campaign%3A7%3Aright%3A0 | Actual NFT, current owner and available ownership history. |
+| Open /campaigns/0 | Coral Studio: Demo, creator/contributor/treasury roster, visible NFTs, original versus current owners, and deposit/claim section links. |
+| Open /rights/campaign%3A0%3Aright%3A0 | Coral Studio's Artist NFT, current owner and available ownership history. |
 | Connect a Testnet wallet; open /nfts | Current and known transferred rights; an unrelated wallet may own none. |
 | Open /earnings connected | Campaign/account claimed and claimable amounts, including historical earnings. |
 | Open /transactions | Verified app-recorded activity and explicit indexing limitations. |
-| Open /workspace/7 | Eligibility preview; private access requires a signed message and server authorization. |
+| Open /workspace/0 | Eligibility preview; private access requires a signed message and server authorization. |
 
 Settings shows the actual network/RPC/wallet configuration. The /pay/{id} page
 accepts campaign support. Charts use real campaign totals, not invented history.
@@ -171,7 +188,7 @@ investigation.
 | ZINC_PUBLIC_ORIGIN | Request URL origin (local development) |
 
 Behind an HTTPS reverse proxy, set `ZINC_PUBLIC_ORIGIN` to the exact public
-origin, for example `https://zinc-build-production.up.railway.app`. This binds
+origin, for example `https://zinc-demo-production.up.railway.app`. This binds
 workspace signatures, sessions, secure cookies and same-origin API checks to
 the public app rather than the internal container URL. It does not trust
 client-supplied forwarded headers. Update this setting if the public domain changes.

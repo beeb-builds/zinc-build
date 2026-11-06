@@ -12,8 +12,8 @@ application or evidence that the project has been accepted.
 | Project | Zinc |
 | Track | NFTs That Do Something (`nfts`) |
 | Public repository | <https://github.com/beeb-builds/zinc-build> |
-| Hosted Testnet app | <https://zinc-build-production.up.railway.app> |
-| Testnet contract | `zinc-builder-2026.testnet` |
+| Hosted Testnet app | <https://zinc-demo-production.up.railway.app> |
+| Testnet contract | `zinc-demo-2026.testnet` |
 | Judge instructions | [Public tour and two-wallet scenario](JUDGE_DEMO.md) |
 | Verification | [Release evidence and open checks](RELEASE_ACCEPTANCE.md) |
 
